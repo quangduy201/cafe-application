@@ -1,0 +1,5 @@
+mysql-connector-python
+opencv-python-headless
+keras
+tensorflow
+tk
