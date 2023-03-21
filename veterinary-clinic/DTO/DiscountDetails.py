@@ -1,20 +1,21 @@
 class DiscountDetails:
-    def __init__(self, discountID, productID):
-        self.discountID = discountID
-        self.productID = productID
+    def __init__(self, discountID = "", productID = ""):
+        self.__discountID = discountID
+        self.__productID = productID
 
     def getDiscountID(self):
-        return self.discountID
+        return self.__discountID
 
     def setDiscountID(self, discountID):
-        self.discountID = discountID
+        self.__discountID = discountID
 
     def getProductID(self):
-        return self.productID
+        return self.__productID
 
     def setProductID(self, productID):
-        self.productID = productID
+        self.__productID = productID
 
-    def toString(self):
-        return self.discountID + " | " + self.productID
+    def __str__(self):
+        return self.__discountID + " | "\
+            + self.__productID
 

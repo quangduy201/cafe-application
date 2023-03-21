@@ -1,41 +1,44 @@
 class Recipe:
-    def __init__(self, productID, ingredientID, mass, unit, deleted):
-        self.productID = productID
-        self.ingredientID = ingredientID
-        self.mass = mass
-        self.unit = unit
-        self.deleted = deleted
+    def __init__(self, productID = "", ingredientID = "", mass = 0, unit = "", deleted = False):
+        self.__productID = productID
+        self.__ingredientID = ingredientID
+        self.__mass = mass
+        self.__unit = unit
+        self.__deleted = deleted
 
     def getProductID(self):
-        return self.productID
+        return self.__productID
 
     def setProductID(self, productID):
-        self.productID = productID
+        self.__productID = productID
 
     def getIngredientID(self):
-        return self.ingredientID
+        return self.__ingredientID
 
     def setIngredientID(self, ingredientID):
-        self.ingredientID = ingredientID
+        self.__ingredientID = ingredientID
 
     def getMass(self):
-        return self.mass
+        return self.__mass
 
     def setMass(self, mass):
-        self.mass = mass
+        self.__mass = mass
 
     def getUnit(self):
-        return self.unit
+        return self.__unit
 
     def setUnit(self, unit):
-        self.unit = unit
+        self.__unit = unit
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.productID + " | " + self.ingredientID + " | " + self.mass + " | " + self.unit
+    def __str__(self):
+        return self.__productID + " | " \
+            + self.__ingredientID + " | " \
+            + self.__mass + " | " \
+            + self.__unit
 

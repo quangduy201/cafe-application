@@ -1,47 +1,51 @@
 class Ingredient:
-    def __init__(self, ingredientID, name, quantity, unit, supplierID, deleted):
-        self.ingredientID = ingredientID
-        self.name = name
-        self.quantity = quantity
-        self.unit = unit
-        self.supplierID = supplierID
-        self.deleted = deleted
+    def __init__(self, ingredientID = "", name = "", quantity = 0, unit = "", supplierID = "", deleted = False):
+        self.__ingredientID = ingredientID
+        self.__name = name
+        self.__quantity = quantity
+        self.__unit = unit
+        self.__supplierID = supplierID
+        self.__deleted = deleted
 
     def getIngredientID(self):
-        return self.ingredientID
+        return self.__ingredientID
 
     def setIngredientID(self, ingredientID):
-        self.ingredientID = ingredientID
+        self.__ingredientID = ingredientID
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def setName(self, name):
-        self.name = name
+        self.__name = name
 
     def getQuantity(self):
-        return self.quantity
+        return self.__quantity
 
     def setQuantity(self, quantity):
-        self.quantity = quantity
+        self.__quantity = quantity
 
     def getUnit(self):
-        return self.unit
+        return self.__unit
 
     def setUnit(self, unit):
-        self.unit = unit
+        self.__unit = unit
 
     def getSupplierID(self):
-        return self.supplierID
+        return self.__supplierID
 
     def setSupplierID(self, supplierID):
-        self.supplierID = supplierID
+        self.__supplierID = supplierID
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.ingredientID + " | " + self.name + " | " + self.quantity + " | " + self.unit + " | " + self.supplierID
+    def __str__(self):
+        return self.__ingredientID + " | " \
+            + self.__name + " | " \
+            + self.__quantity + " | " \
+            + self.__unit + " | " \
+            + self.__supplierID

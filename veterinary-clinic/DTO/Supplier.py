@@ -1,56 +1,61 @@
 class Supplier:
-    def __init__(self, supplierID, name, phone, address, email, price, deleted):
-        self.supplierID = supplierID
-        self.name = name
-        self.phone = phone
-        self.address = address
-        self.email = email
-        self.price = price
-        self.deleted = deleted
+    def __init__(self, supplierID = "", name = "", phone = "", address = "", email = "", price = 0, deleted = False):
+        self.__supplierID = supplierID
+        self.__name = name
+        self.__phone = phone
+        self.__address = address
+        self.__email = email
+        self.__price = price
+        self.__deleted = deleted
 
     def getSupplierID(self):
-        return self.supplierID
+        return self.__supplierID
 
     def setSupplierID(self, supplierID):
-        self.supplierID = supplierID
+        self.__supplierID = supplierID
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def setName(self, name):
-        self.name = name
+        self.__name = name
 
     def getPhone(self):
-        return self.phone
+        return self.__phone
 
     def setPhone(self, phone):
-        self.phone = phone
+        self.__phone = phone
 
     def getAddress(self):
-        return self.address
+        return self.__address
 
     def setAddress(self, address):
-        self.address = address
+        self.__address = address
 
     def getEmail(self):
-        return self.email
+        return self.__email
 
     def setEmail(self, email):
-        self.email = email
+        self.__email = email
 
     def getPrice(self):
-        return self.price
+        return self.__price
 
     def setPrice(self, price):
-        self.price = price
+        self.__price = price
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.supplierID + " | " + self.name + " | " + self.phone + " | " + self.address + " | " + self.email + " | " + self.price
+    def __str__(self):
+        return self.__supplierID + " | " \
+            + self.__name + " | " \
+            + self.__phone + " | " \
+            + self.__address + " | " \
+            + self.__email + " | " \
+            + self.__price
 
 

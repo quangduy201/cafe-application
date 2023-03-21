@@ -1,47 +1,52 @@
+from datetime import date
 class Discount:
-    def __init__(self, discountID, discountPercent, startDay, endDay, status, deleted):
-        self.discountID = discountID
-        self.discountPercent = discountPercent
-        self.startDay = startDay
-        self.endDay = endDay
-        self.status = status
-        self.deleted = deleted
+    def __init__(self, discountID = "", discountPercent = 0, startDay = date(0,0,0), endDay = date(0,0,0), status = "", deleted = False):
+        self.__discountID = discountID
+        self.__discountPercent = discountPercent
+        self.__startDay = startDay
+        self.__endDay = endDay
+        self.__status = status
+        self.__deleted = deleted
 
     def getDiscountID(self):
-        return self.discountID
+        return self.__discountID
 
     def setDiscountID(self, discountID):
-        self.discountID = discountID
+        self.__discountID = discountID
 
     def getDiscountPercent(self):
-        return self.discountPercent
+        return self.__discountPercent
 
     def setDiscountPercent(self, discountPercent):
-        self.discountPercent = discountPercent
+        self.__discountPercent = discountPercent
 
     def getStartDay(self):
-        return self.startDay
+        return self.__startDay
 
     def setStartDay(self, startDay):
-        self.startDay = startDay
+        self.__startDay = startDay
 
     def getEndDay(self):
-        return self.endDay
+        return self.__endDay
 
     def setEndDay(self, endDay):
-        self.endDay = endDay
+        self.__endDay = endDay
 
     def getStatus(self):
-        return self.status
+        return self.__status
 
     def setStatus(self, status):
-        self.status = status
+        self.__status = status
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.discountID + " | " + self.status + " | " + self.discountPercent + " | " +self. startDay + " | " + self.endDay
+    def __str__(self):
+        return self.__discountID + " | " \
+            + self.__status + " | " \
+            + self.__discountPercent + " | " \
+            + self.__startDay + " | " \
+            + self.__endDay

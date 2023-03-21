@@ -1,47 +1,51 @@
 class Account:
-    def __init__(self, accountID, username, password, decentralizationID, staffID, deleted):
-        self.AccountID = accountID
-        self.username = username
-        self.password = password
-        self.decentralizationID = decentralizationID
-        self.staffID = staffID
-        self.deleted = deleted
+    def __init__(self, accountID = "", username = "", password = "", decentralizationID = "", staffID = "", deleted = False):
+        self.__AccountID = accountID
+        self.__username = username
+        self.__password = password
+        self.__decentralizationID = decentralizationID
+        self.__staffID = staffID
+        self.__deleted = deleted
 
     def getAccountID(self):
-        return self.AccountID
+        return self.__AccountID
 
     def setAccountID(self, accountID):
-        self.AccountID = accountID
+        self.__AccountID = accountID
 
     def getUsername(self):
-        return self.username
+        return self.__username
 
     def setUsername(self, username):
-        self.username = username
+        self.__username = username
 
     def getPassword(self):
-        return self.password
+        return self.__password
 
     def setPassword(self, password):
-        self.password = password
+        self.__password = password
 
     def getDecentralizationID(self):
-        return self.decentralizationID
+        return self.__decentralizationID
 
     def setDecentralizationID(self, decentralizationID):
-        self.decentralizationID = decentralizationID
+        self.__decentralizationID = decentralizationID
 
     def getStaffID(self):
-        return self.staffID
+        return self.__staffID
 
     def setStaffID(self, staffID):
-        self.staffID = staffID
+        self.__staffID = staffID
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.accountID + " | " + self.username + " | " + self.password + " | " + self.decentralizationID + " | " + self.staffID;
+    def __str__(self):
+        return self.__accountID + " | " \
+            + self.__username + " | " \
+            + self.__password + " | " \
+            + self.__decentralizationID + " | " \
+            + self.__staffID;

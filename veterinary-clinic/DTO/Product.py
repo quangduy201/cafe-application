@@ -1,47 +1,51 @@
 class Product:
-    def __init__(self, productID, name, categoryID, size, cost, deleted):
-        self.productID = productID
-        self.name = name
-        self.categoryID = categoryID
-        self.size = size
-        self.cost = cost
-        self.deleted = deleted
+    def __init__(self, productID  = "", name = "", categoryID = "", size = "", cost = 0, deleted = False):
+        self.__productID = productID
+        self.__name = name
+        self.__categoryID = categoryID
+        self.__size = size
+        self.__cost = cost
+        self.__deleted = deleted
 
     def getProductID(self):
-        return self.productID
+        return self.__productID
 
     def setProductID(self, productID):
-        self.productID = productID
+        self.__productID = productID
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def setName(self, name):
-        self.name = name
+        self.__name = name
 
     def getCategoryID(self):
-        return self.categoryID
+        return self.__categoryID
 
     def setCategoryID(self, categoryID):
-        self.categoryID = categoryID
+        self.__categoryID = categoryID
 
     def getSize(self):
-        return self.size
+        return self.__size
 
     def setSize(self, size):
-        self.size = size
+        self.__size = size
 
     def getCost(self):
-        return self.cost
+        return self.__cost
 
     def setCost(self, cost):
-        self.cost = cost
+        self.__cost = cost
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.productID + " | " + self.name + " | " + self.categoryID + " | " + self.size + " | " + self.cost
+    def __str__(self):
+        return self.__productID + " | " \
+            + self.__name + " | " \
+            + self.__categoryID + " | " \
+            + self.__size + " | " \
+            + self.__cost

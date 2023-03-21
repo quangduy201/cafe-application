@@ -1,41 +1,45 @@
+from datetime import date
 class Receipt:
-    def __init__(self, receiptID, staffID, dor, grandTotal, deleted):
-        self.receiptID = receiptID
-        self.staffID = staffID
-        self.dor = dor
-        self.grandTotal = grandTotal
-        self.deleted = deleted
+    def __init__(self, receiptID = "", staffID = "", dor = date(0,0,0), grandTotal = 0, deleted = False):
+        self.__receiptID = receiptID
+        self.__staffID = staffID
+        self.__dor = dor
+        self.__grandTotal = grandTotal
+        self.__deleted = deleted
 
     def getReceiptID(self):
-        return self.receiptID
+        return self.__receiptID
 
     def setReceiptID(self, receiptID):
-        self.receiptID = receiptID
+        self.__receiptID = receiptID
 
     def getStaffID(self):
-        return self.staffID
+        return self.__staffID
 
     def setStaffID(self, staffID):
-        self.staffID = staffID
+        self.__staffID = staffID
 
     def getDor(self):
-        return self.dor
+        return self.__dor
 
     def setDor(self, dor):
-        self.dor = dor
+        self.__dor = dor
 
     def getGrandTotal(self):
-        return self.grandTotal
+        return self.__grandTotal
 
     def setGrandTotal(self, grandTotal):
-        self.grandTotal = grandTotal
+        self.__grandTotal = grandTotal
 
     def isDeleted(self):
-        return self.deleted
+        return self.__deleted
 
     def setDeleted(self, deleted):
-        self.deleted = deleted
+        self.__deleted = deleted
 
-    def toString(self):
-        return self.receiptID + "  | " + self.staffID + "  | " + self.dor + "  | " + self.grandTotal
+    def __str__(self):
+        return self.__receiptID + "  | " \
+            + self.__staffID + "  | " \
+            + self.__dor + "  | " \
+            + self.__grandTotal
 
