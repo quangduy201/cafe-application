@@ -1,3 +1,17 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+parts/
+sdist/
+*.egg-info/
+.installed.cfg
+*.egg
