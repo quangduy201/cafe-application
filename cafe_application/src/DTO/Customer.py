@@ -1,4 +1,6 @@
 from datetime import date
+
+
 class Customer:
     def __init__(self, customerID = "", name = "", gender = "", dateOfBirth = date(0,0,0), phone = "", membership = False, dateOfSup = date(0,0,0), deleted = False):
         self.__customerID = customerID

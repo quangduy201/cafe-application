@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cafe Application",
+            "type": "python",
+            "request": "launch",
+            "module": "app",
+            "console": "externalTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "externalTerminal",
+            "justMyCode": true,
+            "cwd": "${fileDirname}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}${pathSeparator}cafe_application${pathSeparator}src${env:PYTHONPATH}",
+            }
+        }
+    ]
+}

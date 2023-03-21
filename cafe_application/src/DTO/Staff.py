@@ -1,4 +1,6 @@
 from datetime import date
+
+
 class Staff:
     def __init__(self, staffID = "", name = "", gender = "", dateOfBirth = date(0,0,0), address = "", phone = "", email = "", salary = 0, dateOfEntry = date(0,0,0), deleted = False):
         self.__staffID = staffID

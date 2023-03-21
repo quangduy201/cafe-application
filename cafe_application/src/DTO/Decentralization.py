@@ -3,7 +3,7 @@ class Decentralization:
     VIEW = 1
     EDIT = 2
     ALL = 3
-    def __init__(self, decentralizationID = "", isRecipe = 0, isProduct = 0, isCategory = 0, isBill = 0, isDiscount = 0, isCustomer = 0, isWarehouses = 0, isStaff = 0, isAccount = 0, isDecentralize = 0, decentralizationName = 0, deleted = False):
+    def __init__(self, decentralizationID = "", isRecipe = 0, isProduct = 0, isCategory = 0, isBill = 0, isDiscount = 0, isCustomer = 0, isWarehouses = 0, isStaff = 0, isAccount = 0, isDecentralize = 0, decentralizationName = "", deleted = False):
         self.__decentralizationID = decentralizationID
         self.__isRecipe = isRecipe
         self.__isProduct = isProduct

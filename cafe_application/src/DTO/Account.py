@@ -1,6 +1,6 @@
 class Account:
     def __init__(self, accountID = "", username = "", password = "", decentralizationID = "", staffID = "", deleted = False):
-        self.__AccountID = accountID
+        self.__accountID = accountID
         self.__username = username
         self.__password = password
         self.__decentralizationID = decentralizationID
@@ -8,10 +8,10 @@ class Account:
         self.__deleted = deleted
 
     def getAccountID(self):
-        return self.__AccountID
+        return self.__accountID
 
     def setAccountID(self, accountID):
-        self.__AccountID = accountID
+        self.__accountID = accountID
 
     def getUsername(self):
         return self.__username
@@ -48,4 +48,4 @@ class Account:
             + self.__username + " | " \
             + self.__password + " | " \
             + self.__decentralizationID + " | " \
-            + self.__staffID;
+            + self.__staffID

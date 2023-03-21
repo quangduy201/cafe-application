@@ -1,4 +1,6 @@
 from datetime import date
+
+
 class Receipt:
     def __init__(self, receiptID = "", staffID = "", dor = date(0,0,0), grandTotal = 0, deleted = False):
         self.__receiptID = receiptID

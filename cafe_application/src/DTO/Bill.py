@@ -1,4 +1,6 @@
 from datetime import date
+
+
 class Bill:
     def __init__(self, billID = "", customerID = "", staffID = "", dateOfPurchase = date(0,0,0), total = 0, deleted = False):
         self.__billID = billID

@@ -1,4 +1,6 @@
 from datetime import date
+
+
 class Discount:
     def __init__(self, discountID = "", discountPercent = 0, startDay = date(0,0,0), endDay = date(0,0,0), status = "", deleted = False):
         self.__discountID = discountID
