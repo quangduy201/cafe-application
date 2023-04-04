@@ -1,53 +1,55 @@
+from datetime import datetime
+
 import mysql.connector
 from mysql.connector import Error
-from datetime import datetime
+
 
 class MySQL:
     def __init__(self):
         try:
-            self.connection = mysql.connector.connect(
+            self.__connection = mysql.connector.connect(
                 host="localhost",
                 user="root",
                 password="",
                 database="cafe-management"
             )
-            self.cursor = self.connection.cursor()
+            self.__cursor = self.__connection.cursor()
         except Error as e:
             print(f"Error while connecting to MySQL: {e}")
 
     def close(self):
-        if self.connection.is_connected():
-            self.cursor.close()
-            self.connection.close()
+        if self.__connection.is_connected():
+            self.__cursor.close()
+            self.__connection.close()
 
     def getConnection(self):
-        return self.connection
+        return self.__connection
 
     def getCursor(self):
-        return self.cursor
+        return self.__cursor
 
-    def executeQuery(self, query, *values):
+    def executeQuery(self, query, *values) -> list:
         formatted_query = self.formatQuery(query, *values)
         result = []
         try:
-            self.cursor.execute(formatted_query)
-            column_names = [desc[0] for desc in self.cursor.description]
-            for row in self.cursor.fetchall():
+            self.__cursor.execute(formatted_query)
+            column_names = [desc[0] for desc in self.__cursor.description]
+            for row in self.__cursor.fetchall():
                 result.append(dict(zip(column_names, row)))
         except Error as e:
             print(f"Error while executing query: {e}")
         return result
 
-    def executeUpdate(self, query, *values):
+    def executeUpdate(self, query, *values) -> int:
         formatted_query = self.formatQuery(query, *values)
         try:
-            self.cursor.execute(formatted_query)
-            self.connection.commit()
-            return self.cursor.rowcount
+            self.__cursor.execute(formatted_query)
+            self.__connection.commit()
+            return self.__cursor.rowcount
         except Error as e:
             print(f"Error while executing update: {e}")
 
-    def formatQuery(self, query, *values):
+    def formatQuery(self, query, *values) -> str:
         for value in values:
             if isinstance(value, str) or isinstance(value, datetime):
                 string_value = f"'{value}'"

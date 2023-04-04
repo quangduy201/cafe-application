@@ -25,7 +25,7 @@ class AccountDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertAccount(self, account: Account) -> int:
+    def addAccount(self, account: Account) -> int:
         try:
             return self.create(
                 account.getAccountID(),
@@ -36,7 +36,7 @@ class AccountDAL(Manager):
                 False
             ) # account khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in AccountDAL.insertAccount(): {e}")
+            print(f"Error occurred in AccountDAL.addAccount(): {e}")
         return 0
 
     def updateAccount(self, account: Account) -> int:
@@ -54,9 +54,9 @@ class AccountDAL(Manager):
             print(f"Error occurred in AccountDAL.updateAccount(): {e}")
         return 0
 
-    def removeAccount(self, *conditions: str) -> int:
+    def deleteAccount(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in AccountDAL.deleteAccount(): {e}")

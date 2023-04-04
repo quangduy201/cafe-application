@@ -2,7 +2,7 @@ from datetime import date
 
 
 class Customer:
-    def __init__(self, customerID = "", name = "", gender = "", dateOfBirth = date(0,0,0), phone = "", membership = False, dateOfSup = date(0,0,0), deleted = False):
+    def __init__(self, customerID = "", name = "", gender = "", dateOfBirth = date(1, 1, 1), phone = "", membership = False, dateOfSup = date(1, 1, 1), deleted = False):
         self.__customerID = customerID
         self.__name = name
         self.__gender = gender
@@ -12,59 +12,59 @@ class Customer:
         self.__dateOfSup = dateOfSup
         self.__deleted = deleted
 
-    def getCustomerID(self):
+    def getCustomerID(self) -> str:
         return self.__customerID
 
-    def setCustomerID(self, customerID):
+    def setCustomerID(self, customerID) -> None:
         self.__customerID = customerID
 
-    def getName(self):
+    def getName(self) -> str:
         return self.__name
 
-    def setName(self, name):
+    def setName(self, name) -> None:
         self.__name = name
 
-    def getGender(self):
+    def getGender(self) -> str:
         return self.__gender
 
-    def setGender(self, gender):
+    def setGender(self, gender) -> None:
         self.__gender = gender
 
-    def getDateOfBirth(self):
+    def getDateOfBirth(self) -> date:
         return self.__dateOfBirth
 
-    def setDateOfBirth(self, dateOfBirth):
+    def setDateOfBirth(self, dateOfBirth) -> None:
         self.__dateOfBirth = dateOfBirth
 
-    def getPhone(self):
+    def getPhone(self) -> str:
         return self.__phone
 
-    def setPhone(self, phone):
+    def setPhone(self, phone) -> None:
         self.__phone = phone
 
-    def isMembership(self):
+    def isMembership(self) -> bool:
         return self.__membership
 
-    def setMembership(self, membership):
+    def setMembership(self, membership) -> None:
         self.__membership = membership
 
-    def getDateOfSup(self):
+    def getDateOfSup(self) -> date:
         return self.__dateOfSup
 
-    def setDateOfSup(self, dateOfSup):
+    def setDateOfSup(self, dateOfSup) -> None:
         self.__dateOfSup = dateOfSup
 
-    def isDeleted(self):
+    def isDeleted(self) -> bool:
         return self.__deleted
 
-    def setDeleted(self, deleted):
+    def setDeleted(self, deleted) -> None:
         self.__deleted = deleted
 
     def __str__(self):
-        return self.__customerID + " | " \
-            + self.__name + " | " \
-            + self.__gender + " | " \
-            + self.__dateOfBirth + " | " \
-            + self.__phone + " | " \
-            + self.__membership + " | " \
-            + self.__dateOfSup
+        return f"{self.__customerID} | " \
+            + f"{self.__name} | " \
+            + f"{self.__gender} | " \
+            + f"{self.__dateOfBirth} | " \
+            + f"{self.__phone} | " \
+            + f"{self.__membership} | " \
+            + f"{self.__dateOfSup}"

@@ -26,7 +26,7 @@ class BillDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertBill(self, bill: Bill) -> int:
+    def addBill(self, bill: Bill) -> int:
         try:
             return self.create(
                 bill.getBillID(),
@@ -37,7 +37,7 @@ class BillDAL(Manager):
                 False
             )  # bill khi tạo mặc định total, deleted = 0
         except Exception as e:
-            print(f"Error occurred in BillDAL.insertBill(): {e}")
+            print(f"Error occurred in BillDAL.addBill(): {e}")
             return 0
 
     def updateBill(self, bill: Bill) -> int:
@@ -55,9 +55,9 @@ class BillDAL(Manager):
             print(f"Error occurred in BillDAL.updateBill(): {e}")
             return 0
 
-    def removeBill(self, *conditions: str) -> int:
+    def deleteBill(self, *conditions: str) -> int:
         try:
-            update_values = [1]
+            update_values = [True]
             return self.update(update_values, *conditions)
         except Exception as e:
             print(f"Error occurred in BillDAL.deleteBill(): {e}")
