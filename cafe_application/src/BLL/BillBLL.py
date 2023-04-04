@@ -1,27 +1,62 @@
 from typing import List
 
+from BLL.Manager import Manager
 from DAL.BillDAL import BillDAL
 from DTO.Bill import Bill
 
 
-class BillBLL:
+class BillBLL(Manager[Bill]):
     def __init__(self):
         try:
-            self.billDAL = BillDAL()
+            self.__billDAL = BillDAL()
+            self.__billList = self.searchBills()
         except Exception:
             pass
 
-    def insertBill(self, bill: Bill) -> bool:
-        return self.billDAL.insertBill(bill) != 0
+    def getBillDAL(self) -> BillDAL:
+        return self.__billDAL
+
+    def setBillDAL(self, billDAL: BillDAL) -> BillDAL:
+        self.__billDAL = billDAL
+
+    def getBillList(self) -> list:
+        return self.__billList
+
+    def setBillList(self, billList) -> list:
+        self.__billList = billList
+
+    def getData(self) -> list[list[object]]:
+        return super().getData(self.__billList)
+
+    def addBill(self, bill: Bill) -> bool:
+        self.__billList.append(bill)
+        return self.__billDAL.addBill(bill) != 0
 
     def updateBill(self, bill: Bill) -> bool:
-        return self.billDAL.updateBill(bill) != 0
+        self.__billList[self.getIndex(bill, "BILL_ID", self.__billList)] = bill
+        return self.__billDAL.updateBill(bill) != 0
 
-    def removeBill(self, id: str) -> bool:
-        return self.billDAL.removeBill(f"BILL_ID = '{id}'") != 0
+    def deleteBill(self, bill: Bill) -> bool:
+        self.__billList.pop(self.getIndex(bill, "BILL_ID", self.__billList))
+        return self.__billDAL.deleteBill(f"BILL_ID = '{bill.getBillID}'") != 0
 
     def searchBills(self, *conditions: str) -> List[Bill]:
-        return self.billDAL.searchBills(*conditions)
+        return self.__billDAL.searchBills(*conditions)
+
+    def findBillsBy(self, conditions: dict) -> list[Bill]:
+        bills = []
+        for key, value in conditions.items():
+            bills = super().findObjectsBy(key, value, bills)
+        return bills
 
     def getAutoID(self) -> str:
-        return self.billDAL.getAutoID()
+        return super().getAutoID("BI", 4, self.__billList)
+
+    def getValueByKey(self, bill: Bill, key: str) -> object:
+        return {
+            "BILL_ID": bill.getBillID(),
+            "CUSTOMER_ID": bill.getCustomerID(),
+            "STAFF_ID": bill.getStaffID(),
+            "DOPURCHASE": bill.getDateOfPurchase(),
+            "TOTAL": bill.getTotal()
+        }.get(key, None)
