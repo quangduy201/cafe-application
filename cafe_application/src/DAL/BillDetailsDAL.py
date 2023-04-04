@@ -3,6 +3,7 @@ from typing import List
 from DAL.Manager import Manager
 from DTO.BillDetails import BillDetails
 
+
 class BillDetailsDAL(Manager):
     def __init__(self):
         super().__init__("bill_details", [
@@ -18,7 +19,7 @@ class BillDetailsDAL(Manager):
             row['QUANTITY']
         ))
 
-    def insertBillDetails(self, billDetails: BillDetails) -> int:
+    def addBillDetails(self, billDetails: BillDetails) -> int:
         try:
             return self.create(
                 billDetails.getBillID(),
@@ -26,10 +27,10 @@ class BillDetailsDAL(Manager):
                 billDetails.getQuantity()
             )
         except Exception as e:
-            print(f"Error occurred in BillDetailsDAL.insertBillDetails(): {e}")
+            print(f"Error occurred in BillDetailsDAL.addBillDetails(): {e}")
         return 0
 
-    def searchAccounts(self, *conditions: str) -> List[BillDetails]:
+    def searchBillDetails(self, *conditions: str) -> List[BillDetails]:
         try:
             return self.convertToBillDetails(self.read(*conditions))
         except Exception as e:

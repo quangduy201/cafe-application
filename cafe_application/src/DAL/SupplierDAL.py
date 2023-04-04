@@ -27,7 +27,7 @@ class SupplierDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertSupplier(self, supplier: Supplier) -> int:
+    def addSupplier(self, supplier: Supplier) -> int:
         try:
             return self.create(
                 supplier.getSupplierID(),
@@ -37,9 +37,9 @@ class SupplierDAL(Manager):
                 supplier.getEmail(),
                 supplier.getPrice(),
                 False
-            ) # Supplier khi tạo mặc định deleted = 0
+            ) # supplier khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in SupplierDAL.insertSupplier(): {e}")
+            print(f"Error occurred in SupplierDAL.addSupplier(): {e}")
         return 0
 
     def updateSupplier(self, supplier: Supplier) -> int:
@@ -51,15 +51,16 @@ class SupplierDAL(Manager):
                 supplier.getAddress(),
                 supplier.getEmail(),
                 supplier.getPrice(),
+                supplier.isDeleted()
             ]
-            return self.update(updateValues, f"SUPPLIER_ID = {Supplier.getSupplierID()}")
+            return self.update(updateValues, f"SUPPLIER_ID = {supplier.getSupplierID()}")
         except Exception as e:
             print(f"Error occurred in SupplierDAL.updateSupplier(): {e}")
         return 0
 
-    def removeSupplier(self, *conditions: str) -> int:
+    def deleteSupplier(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in SupplierDAL.deleteSupplier(): {e}")

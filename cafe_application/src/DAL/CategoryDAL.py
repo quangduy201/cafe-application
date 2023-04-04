@@ -21,16 +21,16 @@ class CategoryDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertCategory(self, category: Category) -> int:
+    def addCategory(self, category: Category) -> int:
         try:
             return self.create(
                 category.getCategoryID(),
                 category.getName(),
                 category.getQuantity(),
                 False
-            ) # Category khi tạo mặc định deleted = 0
+            ) # category khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in CategoryDAL.insertCategory(): {e}")
+            print(f"Error occurred in CategoryDAL.addCategory(): {e}")
         return 0
 
     def updateCategory(self, category: Category) -> int:
@@ -41,14 +41,14 @@ class CategoryDAL(Manager):
                 category.getQuantity(),
                 category.isDeleted()
             ]
-            return self.update(updateValues, f"CATEGORY_ID = {Category.getCategoryID()}")
+            return self.update(updateValues, f"CATEGORY_ID = {category.getCategoryID()}")
         except Exception as e:
             print(f"Error occurred in CategoryDAL.updateCategory(): {e}")
         return 0
 
-    def removeCategory(self, *conditions: str) -> int:
+    def deleteCategory(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in CategoryDAL.deleteCategory(): {e}")

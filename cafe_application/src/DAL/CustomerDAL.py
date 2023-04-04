@@ -29,7 +29,7 @@ class CustomerDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertCustomer(self, customer: Customer) -> int:
+    def addCustomer(self, customer: Customer) -> int:
         try:
             return self.create(
                 customer.getCustomerID(),
@@ -40,9 +40,9 @@ class CustomerDAL(Manager):
                 customer.isMembership(),
                 customer.getDateOfSup(),
                 False
-            ) # Customer khi tạo mặc định deleted = 0
+            ) # customer khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in CustomerDAL.insertCustomer(): {e}")
+            print(f"Error occurred in CustomerDAL.addCustomer(): {e}")
         return 0
 
     def updateCustomer(self, customer: Customer) -> int:
@@ -55,16 +55,16 @@ class CustomerDAL(Manager):
                 customer.getPhone(),
                 customer.isMembership(),
                 customer.getDateOfSup(),
-                Customer.isDeleted()
+                customer.isDeleted()
             ]
-            return self.update(updateValues, f"CUSTOMER_ID = {Customer.getCustomerID()}")
+            return self.update(updateValues, f"CUSTOMER_ID = {customer.getCustomerID()}")
         except Exception as e:
             print(f"Error occurred in CustomerDAL.updateCustomer(): {e}")
         return 0
 
-    def removeCustomer(self, *conditions: str) -> int:
+    def deleteCustomer(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in CustomerDAL.deleteCustomer(): {e}")

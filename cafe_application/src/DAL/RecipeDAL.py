@@ -23,7 +23,7 @@ class RecipeDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertRecipe(self, recipe: Recipe) -> int:
+    def addRecipe(self, recipe: Recipe) -> int:
         try:
             return self.create(
                 recipe.getProductID(),
@@ -31,9 +31,9 @@ class RecipeDAL(Manager):
                 recipe.getMass(),
                 recipe.getUnit(),
                 False
-            ) # Recipe khi tạo mặc định deleted = 0
+            ) # recipe khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in RecipeDAL.insertRecipe(): {e}")
+            print(f"Error occurred in RecipeDAL.addRecipe(): {e}")
         return 0
 
     def updateRecipe(self, recipe: Recipe) -> int:
@@ -43,16 +43,16 @@ class RecipeDAL(Manager):
                 recipe.getIngredientID(),
                 recipe.getMass(),
                 recipe.getUnit(),
-                Recipe.isDeleted()
+                recipe.isDeleted()
             ]
-            return self.update(updateValues, f"PRODUCT_ID = {Recipe.getProductID()}", f"INGREDIENT_ID = {Recipe.getIngredientID()}")
+            return self.update(updateValues, f"PRODUCT_ID = {recipe.getProductID()}", f"INGREDIENT_ID = {recipe.getIngredientID()}")
         except Exception as e:
             print(f"Error occurred in RecipeDAL.updateRecipe(): {e}")
         return 0
 
-    def removeRecipe(self, *conditions: str) -> int:
+    def deleteRecipe(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in RecipeDAL.deleteRecipe(): {e}")

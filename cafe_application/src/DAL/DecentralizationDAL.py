@@ -8,15 +8,17 @@ class DecentralizationDAL(Manager):
     def __init__(self):
         super().__init__("decentralization", [
             "DECENTRALIZATION_ID",
-            "IS_RECIPE",
+            "IS_SALE",
             "IS_PRODUCT",
             "IS_CATEGORY",
+            "IS_RECIPE",
+            "IS_IMPORT",
             "IS_BILL",
-            "IS_DISCOUNT",
-            "IS_CUSTOMER",
             "IS_WAREHOUSES",
-            "IS_STAFF",
             "IS_ACCOUNT",
+            "IS_STAFF",
+            "IS_CUSTOMER",
+            "IS_DISCOUNT",
             "IS_DECENTRALIZE",
             "DECENTRALIZATION_NAME",
             "DELETED"
@@ -25,39 +27,43 @@ class DecentralizationDAL(Manager):
     def convertToDecentralization(self, data: List[List[object]]) -> List[Decentralization]:
         return self.convert(data, lambda row: Decentralization(
             row['DECENTRALIZATION_ID'],
-            row['IS_RECIPE'],
+            row['IS_SALE'],
             row['IS_PRODUCT'],
             row['IS_CATEGORY'],
+            row['IS_RECIPE'],
+            row['IS_IMPORT'],
             row['IS_BILL'],
-            row['IS_DISCOUNT'],
-            row['IS_CUSTOMER'],
             row['IS_WAREHOUSES'],
-            row['IS_STAFF'],
             row['IS_ACCOUNT'],
+            row['IS_STAFF'],
+            row['IS_CUSTOMER'],
+            row['IS_DISCOUNT'],
             row['IS_DECENTRALIZE'],
             row['DECENTRALIZATION_NAME'],
             bool(row['DELETED'])
         ))
 
-    def insertDecentralization(self, decentralization: Decentralization) -> int:
+    def addDecentralization(self, decentralization: Decentralization) -> int:
         try:
             return self.create(
                 decentralization.getDecentralizationID(),
-                decentralization.getIsRecipe(),
+                decentralization.getIsSale(),
                 decentralization.getIsProduct(),
                 decentralization.getIsCategory(),
+                decentralization.getIsRecipe(),
+                decentralization.getIsImport(),
                 decentralization.getIsBill(),
-                decentralization.getIsDiscount(),
-                decentralization.getIsCustomer(),
                 decentralization.getIsWarehouses(),
-                decentralization.getIsStaff(),
                 decentralization.getIsAccount(),
+                decentralization.getIsStaff(),
+                decentralization.getIsCustomer(),
+                decentralization.getIsDiscount(),
                 decentralization.getIsDecentralize(),
                 decentralization.getDecentralizationName(),
                 False
-            ) # Decentralization khi tạo mặc định deleted = 0
+            ) # decentralization khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in DecentralizationDAL.insertDecentralization(): {e}")
+            print(f"Error occurred in DecentralizationDAL.addDecentralization(): {e}")
         return 0
 
     def updateDecentralization(self, decentralization: Decentralization) -> int:
@@ -75,16 +81,16 @@ class DecentralizationDAL(Manager):
                 decentralization.getIsAccount(),
                 decentralization.getIsDecentralize(),
                 decentralization.getDecentralizationName(),
-                Decentralization.isDeleted()
+                decentralization.isDeleted()
             ]
-            return self.update(updateValues, f"DECENTRALIZATION_ID = {Decentralization.getDecentralizationID()}")
+            return self.update(updateValues, f"DECENTRALIZATION_ID = {decentralization.getDecentralizationID()}")
         except Exception as e:
             print(f"Error occurred in DecentralizationDAL.updateDecentralization(): {e}")
         return 0
 
-    def removeDecentralization(self, *conditions: str) -> int:
+    def deleteDecentralization(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in DecentralizationDAL.deleteDecentralization(): {e}")

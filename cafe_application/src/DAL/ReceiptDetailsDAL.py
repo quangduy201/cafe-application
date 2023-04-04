@@ -21,16 +21,16 @@ class ReceiptDetailsDAL(Manager):
             row['SUPPLIER_ID']
         ))
 
-    def insertReceiptDetails(self, receiptDetails: ReceiptDetails) -> int:
+    def addReceiptDetails(self, receiptDetails: ReceiptDetails) -> int:
         try:
             return self.create(
                 receiptDetails.getReceiptID(),
                 receiptDetails.getIngredientID(),
                 receiptDetails.getQuantity(),
                 receiptDetails.getSupplierID()
-            ) # ReceiptDetails khi tạo mặc định deleted = 0
+            ) # receiptDetails khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in ReceiptDetailsDAL.insertReceiptDetails(): {e}")
+            print(f"Error occurred in ReceiptDetailsDAL.addReceiptDetails(): {e}")
         return 0
 
     def searchReceiptDetailss(self, *conditions: str) -> List[ReceiptDetails]:

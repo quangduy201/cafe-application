@@ -17,15 +17,15 @@ class IngredientDAL(Manager):
 
     def convertToIngredients(self, data: List[List[object]]) -> List[Ingredient]:
         return self.convert(data, lambda row: Ingredient(
-            row['Ingredient_ID'],
+            row['INGREDIENT_ID'],
             row['NAME'],
             row['QUANTITY'],
             row['UNIT'],
-            row['SUPPLIER'],
+            row['SUPPLIER_ID'],
             bool(row['DELETED'])
         ))
 
-    def insertIngredient(self, ingredient: Ingredient) -> int:
+    def addIngredient(self, ingredient: Ingredient) -> int:
         try:
             return self.create(
                 ingredient.getIngredientID(),
@@ -34,9 +34,9 @@ class IngredientDAL(Manager):
                 ingredient.getUnit(),
                 ingredient.getSupplierID(),
                 False
-            ) # Ingredient khi tạo mặc định deleted = 0
+            ) # ingredient khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in IngredientDAL.insertIngredient(): {e}")
+            print(f"Error occurred in IngredientDAL.addIngredient(): {e}")
         return 0
 
     def updateIngredient(self, ingredient: Ingredient) -> int:
@@ -47,16 +47,16 @@ class IngredientDAL(Manager):
                 ingredient.getQuantity(),
                 ingredient.getUnit(),
                 ingredient.getSupplierID(),
-                Ingredient.isDeleted()
+                ingredient.isDeleted()
             ]
-            return self.update(updateValues, f"INGREDIENT_ID = {Ingredient.getIngredientID()}")
+            return self.update(updateValues, f"INGREDIENT_ID = {ingredient.getIngredientID()}")
         except Exception as e:
             print(f"Error occurred in IngredientDAL.updateIngredient(): {e}")
         return 0
 
-    def removeIngredient(self, *conditions: str) -> int:
+    def deleteIngredient(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in IngredientDAL.deleteIngredient(): {e}")

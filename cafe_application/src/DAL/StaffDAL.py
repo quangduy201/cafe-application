@@ -33,7 +33,7 @@ class StaffDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertStaff(self, staff: Staff) -> int:
+    def addStaff(self, staff: Staff) -> int:
         try:
             return self.create(
                 staff.getStaffID(),
@@ -46,9 +46,9 @@ class StaffDAL(Manager):
                 staff.getSalary(),
                 staff.getDateOfEntry(),
                 False
-            ) # Staff khi tạo mặc định deleted = 0
+            ) # staff khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in StaffDAL.insertStaff(): {e}")
+            print(f"Error occurred in StaffDAL.addStaff(): {e}")
         return 0
 
     def updateStaff(self, staff: Staff) -> int:
@@ -63,16 +63,16 @@ class StaffDAL(Manager):
                 staff.getEmail(),
                 staff.getSalary(),
                 staff.getDateOfEntry(),
-                Staff.isDeleted()
+                staff.isDeleted()
             ]
-            return self.update(updateValues, f"STAFF_ID = {Staff.getStaffID()}")
+            return self.update(updateValues, f"STAFF_ID = {staff.getStaffID()}")
         except Exception as e:
             print(f"Error occurred in StaffDAL.updateStaff(): {e}")
         return 0
 
-    def removeStaff(self, *conditions: str) -> int:
+    def deleteStaff(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in StaffDAL.deleteStaff(): {e}")

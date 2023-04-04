@@ -17,14 +17,14 @@ class DiscountDetailsDAL(Manager):
             row['PRODUCT_ID']
         ))
 
-    def insertDiscountDetails(self, discountDetails: DiscountDetails) -> int:
+    def addDiscountDetails(self, discountDetails: DiscountDetails) -> int:
         try:
             return self.create(
                 discountDetails.getDiscountID(),
                 discountDetails.getProductID()
-            ) # DiscountDetails khi tạo mặc định deleted = 0
+            ) # discountDetails khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in DiscountDetailsDAL.insertDiscountDetails(): {e}")
+            print(f"Error occurred in DiscountDetailsDAL.addDiscountDetails(): {e}")
         return 0
 
     def searchDiscountDetailss(self, *conditions: str) -> List[DiscountDetails]:

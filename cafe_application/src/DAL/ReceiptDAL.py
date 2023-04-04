@@ -23,7 +23,7 @@ class ReceiptDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertReceipt(self, receipt: Receipt) -> int:
+    def addReceipt(self, receipt: Receipt) -> int:
         try:
             return self.create(
                 receipt.getReceiptID(),
@@ -31,9 +31,9 @@ class ReceiptDAL(Manager):
                 receipt.getDor(),
                 receipt.getGrandTotal(),
                 False
-            ) # Receipt khi tạo mặc định deleted = 0
+            ) # receipt khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in ReceiptDAL.insertReceipt(): {e}")
+            print(f"Error occurred in ReceiptDAL.addReceipt(): {e}")
         return 0
 
     def updateReceipt(self, receipt: Receipt) -> int:
@@ -43,16 +43,16 @@ class ReceiptDAL(Manager):
                 receipt.getStaffID(),
                 receipt.getDor(),
                 receipt.getGrandTotal(),
-                Receipt.isDeleted()
+                receipt.isDeleted()
             ]
-            return self.update(updateValues, f"RECEIPT_ID = {Receipt.getReceiptID()}")
+            return self.update(updateValues, f"RECEIPT_ID = {receipt.getReceiptID()}")
         except Exception as e:
             print(f"Error occurred in ReceiptDAL.updateReceipt(): {e}")
         return 0
 
-    def removeReceipt(self, *conditions: str) -> int:
+    def deleteReceipt(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in ReceiptDAL.deleteReceipt(): {e}")

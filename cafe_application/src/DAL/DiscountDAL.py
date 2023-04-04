@@ -7,6 +7,7 @@ from DTO.Discount import Discount
 class DiscountDAL(Manager):
     def __init__(self):
         super().__init__("discount", [
+            "DISCOUNT_ID",
             "DISCOUNT_PERCENT",
             "START_DATE",
             "END_DATE",
@@ -16,6 +17,7 @@ class DiscountDAL(Manager):
 
     def convertToDiscounts(self, data: List[List[object]]) -> List[Discount]:
         return self.convert(data, lambda row: Discount(
+            row['DISCOUNT_ID'],
             row['DISCOUNT_PERCENT'],
             row['START_DATE'],
             row['END_DATE'],
@@ -23,7 +25,7 @@ class DiscountDAL(Manager):
             bool(row['DELETED'])
         ))
 
-    def insertDiscount(self, discount: Discount) -> int:
+    def addDiscount(self, discount: Discount) -> int:
         try:
             return self.create(
                 discount.getDiscountID(),
@@ -32,9 +34,9 @@ class DiscountDAL(Manager):
                 discount.getEndDay(),
                 discount.getStatus(),
                 False
-            ) # Discount khi tạo mặc định deleted = 0
+            ) # discount khi tạo mặc định deleted = 0
         except Exception as e:
-            print(f"Error occurred in DiscountDAL.insertDiscount(): {e}")
+            print(f"Error occurred in DiscountDAL.addDiscount(): {e}")
         return 0
 
     def updateDiscount(self, discount: Discount) -> int:
@@ -45,16 +47,16 @@ class DiscountDAL(Manager):
                 discount.getStartDay(),
                 discount.getEndDay(),
                 discount.getStatus(),
-                Discount.isDeleted()
+                discount.isDeleted()
             ]
-            return self.update(updateValues, f"DISCOUNT_ID = {Discount.getDiscountID()}")
+            return self.update(updateValues, f"DISCOUNT_ID = {discount.getDiscountID()}")
         except Exception as e:
             print(f"Error occurred in DiscountDAL.updateDiscount(): {e}")
         return 0
 
-    def removeDiscount(self, *conditions: str) -> int:
+    def deleteDiscount(self, *conditions: str) -> int:
         try:
-            updateValues = [1]
+            updateValues = [True]
             return self.update(updateValues, *conditions)
         except Exception as e:
             print(f"Error occurred in DiscountDAL.deleteDiscount(): {e}")

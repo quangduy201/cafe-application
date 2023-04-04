@@ -6,22 +6,28 @@ from DAL.MySQL import MySQL
 class Manager(MySQL):
     def __init__(self, tableName: str, columnsName: List[str]) -> None:
         super().__init__()
-        self.tableName = tableName
-        self.columnsName = columnsName
+        self.__tableName = tableName
+        self.__columnNames = columnsName
+
+    def getTableName(self):
+        return self.__tableName
+
+    def getColumnNames(self):
+        return self.__columnNames
 
     def create(self, *values) -> int:
-        if values is None or len(values) != len(self.columnsName):
+        if values is None or len(values) != len(self.__columnNames):
             raise ValueError("Invalid number of arguments.")
 
-        query = f"INSERT INTO `{self.tableName}` VALUES(?{', ?'*(len(values) - 1)});"
+        query = f"INSERT INTO `{self.__tableName}` VALUES(?{', ?'*(len(values) - 1)});"
 
         return self.executeUpdate(query, *values)
 
     def read(self, *conditions) -> List[List[object]]:
-        query = f"SELECT * FROM `{self.tableName}`"
+        query = f"SELECT * FROM `{self.__tableName}`"
 
         if conditions and len(conditions) > 0:
-            query += f" WHERE {' AND '.join(conditions)} AND DELETED = 0"
+            query += f" WHERE {' AND '.join(conditions)}"
 
         query += ";"
         return self.executeQuery(query)
@@ -36,10 +42,9 @@ class Manager(MySQL):
         if len(updateValues) == 1:
             setClause = "DELETED = ?"
         else:
-            columns = self.columnsName[conditionsLength:-1]
-            setClause = " = ?, ".join(columns) + " = ?"
+            setClause = " = ?, ".join(self.__columnNames) + " = ?"
 
-        query = f"UPDATE `{self.tableName}` SET {setClause}"
+        query = f"UPDATE `{self.__tableName}` SET {setClause}"
 
         if conditionsLength > 0:
             query += f" WHERE {' AND '.join(conditions)}"
@@ -48,7 +53,7 @@ class Manager(MySQL):
         return self.executeUpdate(query, *updateValues)
 
     def delete(self, *conditions) -> int:
-        query = f"DELETE FROM `{self.tableName}`"
+        query = f"DELETE FROM `{self.__tableName}`"
         values = []
 
         if conditions and len(conditions) > 0:
@@ -73,7 +78,7 @@ class Manager(MySQL):
 
         lastAccount = data[-1]
         size = f"{type_}{self.formatNumberToString(len(data), digits)}"
-        id = self.tableName.upper() + '_ID'
+        id = self.__tableName.upper() + '_ID'
         if lastAccount[id] == size:
             count += len(data)
         else:
