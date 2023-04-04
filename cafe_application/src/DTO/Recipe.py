@@ -1,44 +1,43 @@
 class Recipe:
-    def __init__(self, productID = "", ingredientID = "", mass = 0, unit = "", deleted = False):
+    def __init__(self, productID = "", ingredientID = "", mass = 0.0, unit = "", deleted = False):
         self.__productID = productID
         self.__ingredientID = ingredientID
         self.__mass = mass
         self.__unit = unit
         self.__deleted = deleted
 
-    def getProductID(self):
+    def getProductID(self) -> str:
         return self.__productID
 
-    def setProductID(self, productID):
+    def setProductID(self, productID) -> None:
         self.__productID = productID
 
-    def getIngredientID(self):
+    def getIngredientID(self) -> str:
         return self.__ingredientID
 
-    def setIngredientID(self, ingredientID):
+    def setIngredientID(self, ingredientID) -> None:
         self.__ingredientID = ingredientID
 
-    def getMass(self):
+    def getMass(self) -> float:
         return self.__mass
 
-    def setMass(self, mass):
+    def setMass(self, mass) -> None:
         self.__mass = mass
 
-    def getUnit(self):
+    def getUnit(self) -> str:
         return self.__unit
 
-    def setUnit(self, unit):
+    def setUnit(self, unit) -> None:
         self.__unit = unit
 
-    def isDeleted(self):
+    def isDeleted(self) -> bool:
         return self.__deleted
 
-    def setDeleted(self, deleted):
+    def setDeleted(self, deleted) -> None:
         self.__deleted = deleted
 
     def __str__(self):
-        return self.__productID + " | " \
-            + self.__ingredientID + " | " \
-            + self.__mass + " | " \
-            + self.__unit
-
+        return f"{self.__productID} | " \
+            + f"{self.__ingredientID} | " \
+            + f"{self.__mass} | " \
+            + f"{self.__unit}"
