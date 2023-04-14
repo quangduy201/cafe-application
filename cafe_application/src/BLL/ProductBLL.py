@@ -9,7 +9,7 @@ class ProductBLL(Manager[Product]):
     def __init__(self):
         try:
             self.__productDAL = ProductDAL()
-            self.__productList = self.searchProducts()
+            self.__productList = self.searchProducts("DELETED = 0")
         except Exception:
             pass
 
@@ -29,7 +29,7 @@ class ProductBLL(Manager[Product]):
         return super().getData(self.__productList)
 
     def addProduct(self, product: Product) -> bool:
-        if (self.getIndex(product, "NAME", self.getProductList)) != -1:
+        if (self.getIndex(product, "NAME", self.__productList)) != -1:
             print("Can't add new product. Name already exists.")
             return False
         self.__productList.append(product)
@@ -41,19 +41,19 @@ class ProductBLL(Manager[Product]):
 
     def deleteProduct(self, product: Product) -> bool:
         self.__productList.pop(self.getIndex(product, "PRODUCT_ID", self.__productList))
-        return self.__productDAL.deleteProduct(f"PRODUCT_ID = '{product.getProductID}'") != 0
+        return self.__productDAL.deleteProduct(f"PRODUCT_ID = '{product.getProductID()}'") != 0
 
     def searchProducts(self, *conditions: str) -> List[Product]:
         return self.__productDAL.searchProducts(*conditions)
 
     def findProductsBy(self, conditions: dict) -> list[Product]:
-        products = []
+        products = self.__productList
         for key, value in conditions.items():
             products = super().findObjectsBy(key, value, products)
         return products
 
     def getAutoID(self) -> str:
-        return super().getAutoID("PR", 3, self.__productList)
+        return super().getAutoID("PR", 3, self.searchProducts())
 
     def getValueByKey(self, product: Product, key: str) -> object:
         return {

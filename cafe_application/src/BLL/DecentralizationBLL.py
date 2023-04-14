@@ -9,7 +9,7 @@ class DecentralizationBLL(Manager[Decentralization]):
     def __init__(self):
         try:
             self.__decentralizationDAL = DecentralizationDAL()
-            self.__decentralizationList = self.searchDecentralizations()
+            self.__decentralizationList = self.searchDecentralizations("DELETED = 0")
         except Exception:
             pass
 
@@ -41,19 +41,19 @@ class DecentralizationBLL(Manager[Decentralization]):
 
     def deleteDecentralization(self, decentralization: Decentralization) -> bool:
         self.__decentralizationList.pop(self.getIndex(decentralization, "DECENTRALIZATION_ID", self.__decentralizationList))
-        return self.__decentralizationDAL.deleteDecentralization(f"DECENTRALIZATION_ID = '{decentralization.getDecentralizationID}'") != 0
+        return self.__decentralizationDAL.deleteDecentralization(f"DECENTRALIZATION_ID = '{decentralization.getDecentralizationID()}'") != 0
 
     def searchDecentralizations(self, *conditions: str) -> List[Decentralization]:
         return self.__decentralizationDAL.searchDecentralizations(*conditions)
 
     def findDecentralizationsBy(self, conditions: dict) -> list[Decentralization]:
-        decentralizations = []
+        decentralizations = self.__decentralizationList
         for key, value in conditions.items():
             decentralizations = super().findObjectsBy(key, value, decentralizations)
         return decentralizations
 
     def getAutoID(self) -> str:
-        return super().getAutoID("DE", 2, self.__decentralizationList)
+        return super().getAutoID("DE", 2, self.searchDecentralizations())
 
     def getValueByKey(self, decentralization: Decentralization, key: str) -> object:
         return {
@@ -69,6 +69,6 @@ class DecentralizationBLL(Manager[Decentralization]):
             "IS_STAFF": decentralization.getIsStaff(),
             "IS_CUSTOMER": decentralization.getIsCustomer(),
             "IS_DISCOUNT": decentralization.getIsDiscount(),
-            "IS_DECENTRALIZATION": decentralization.getIsDecentralization(),
+            "IS_DECENTRALIZATION": decentralization.getIsDecentralize(),
             "DECENTRALIZATION_NAME": decentralization.getDecentralizationName()
         }.get(key, None)

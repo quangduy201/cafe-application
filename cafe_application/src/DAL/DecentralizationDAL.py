@@ -70,20 +70,22 @@ class DecentralizationDAL(Manager):
         try:
             updateValues = [
                 decentralization.getDecentralizationID(),
-                decentralization.getIsRecipe(),
+                decentralization.getIsSale(),
                 decentralization.getIsProduct(),
                 decentralization.getIsCategory(),
+                decentralization.getIsRecipe(),
+                decentralization.getIsImport(),
                 decentralization.getIsBill(),
-                decentralization.getIsDiscount(),
-                decentralization.getIsCustomer(),
                 decentralization.getIsWarehouses(),
-                decentralization.getIsStaff(),
                 decentralization.getIsAccount(),
+                decentralization.getIsStaff(),
+                decentralization.getIsCustomer(),
+                decentralization.getIsDiscount(),
                 decentralization.getIsDecentralize(),
                 decentralization.getDecentralizationName(),
                 decentralization.isDeleted()
             ]
-            return self.update(updateValues, f"DECENTRALIZATION_ID = {decentralization.getDecentralizationID()}")
+            return self.update(updateValues, f"DECENTRALIZATION_ID = '{decentralization.getDecentralizationID()}'")
         except Exception as e:
             print(f"Error occurred in DecentralizationDAL.updateDecentralization(): {e}")
         return 0

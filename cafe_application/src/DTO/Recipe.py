@@ -1,10 +1,17 @@
 class Recipe:
-    def __init__(self, productID = "", ingredientID = "", mass = 0.0, unit = "", deleted = False):
+    def __init__(self, recipeID = "", productID = "", ingredientID = "", mass = 0.0, unit = "", deleted = False):
+        self.__recipeID = recipeID
         self.__productID = productID
         self.__ingredientID = ingredientID
         self.__mass = mass
         self.__unit = unit
         self.__deleted = deleted
+
+    def getRecipeID(self) -> str:
+        return self.__recipeID
+
+    def setRecipeID(self, recipeID) -> None:
+        self.__recipeID = recipeID
 
     def getProductID(self) -> str:
         return self.__productID
@@ -37,7 +44,8 @@ class Recipe:
         self.__deleted = deleted
 
     def __str__(self):
-        return f"{self.__productID} | " \
+        return f"{self.__recipeID} | " \
+            + f"{self.__productID} | " \
             + f"{self.__ingredientID} | " \
             + f"{self.__mass} | " \
             + f"{self.__unit}"

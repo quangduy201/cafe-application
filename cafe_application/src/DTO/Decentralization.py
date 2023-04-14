@@ -19,6 +19,7 @@ class Decentralization:
         self.__isDecentralize  = isDecentralize
         self.__decentralizationName  = decentralizationName
         self.__deleted  = deleted
+        self.setArray()
 
 
     def getDecentralizationID(self) -> str:
@@ -26,6 +27,24 @@ class Decentralization:
 
     def setDecentralizationID(self, decentralizationID) -> None:
         self.__decentralizationID = decentralizationID
+
+    def getArray(self) -> list:
+        return self.__arr
+
+    def setArray(self) -> None:
+        self.__arr = []
+        self.__arr.append(self.__isSale)
+        self.__arr.append(self.__isProduct)
+        self.__arr.append(self.__isCategory)
+        self.__arr.append(self.__isRecipe)
+        self.__arr.append(self.__isImport)
+        self.__arr.append(self.__isBill)
+        self.__arr.append(self.__isWarehouses)
+        self.__arr.append(self.__isAccount)
+        self.__arr.append(self.__isStaff)
+        self.__arr.append(self.__isCustomer)
+        self.__arr.append(self.__isDiscount)
+        self.__arr.append(self.__isDecentralize)
 
     def getIsSale(self) -> int:
         return self.__isSale
@@ -112,17 +131,15 @@ class Decentralization:
         self.__deleted = deleted
 
     def __str__(self):
-        return f"{self.__decentralizationID} | " \
-            + f"{self.__isSale} | " \
-            + f"{self.__isProduct} | " \
-            + f"{self.__isCategory} | " \
-            + f"{self.__isRecipe} | " \
-            + f"{self.__isImport} | " \
-            + f"{self.__isBill} | " \
-            + f"{self.__isWarehouses} | " \
-            + f"{self.__isAccount} | " \
-            + f"{self.__isStaff} | " \
-            + f"{self.__isCustomer} | " \
-            + f"{self.__isDiscount} | " \
-            + f"{self.__isDecentralize} | " \
-            + f"{self.__decentralizationName}"
+        self.string = []
+        for i in self.__arr:
+            if i == 0:
+                self.string.append ("Không")
+            if i == 1:
+                self.string.append ("Xem")
+            if i == 2:
+                self.string.append ("Sửa")
+            if i == 3:
+                self.string.append ("Xem và sửa")
+        s=" | ".join(self.string)
+        return f"{self.__decentralizationID} | " + f"{s} | " + f"{self.__decentralizationName}"

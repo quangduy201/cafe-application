@@ -54,5 +54,5 @@ class Product:
         return f"{self.__productID} | " \
             + f"{self.__name} | " \
             + f"{self.__categoryID} | " \
-            + f"{self.__size} | " \
+            + f"{self.__sized} | " \
             + f"{self.__cost}"

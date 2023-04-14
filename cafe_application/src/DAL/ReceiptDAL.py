@@ -45,7 +45,7 @@ class ReceiptDAL(Manager):
                 receipt.getGrandTotal(),
                 receipt.isDeleted()
             ]
-            return self.update(updateValues, f"RECEIPT_ID = {receipt.getReceiptID()}")
+            return self.update(updateValues, f"RECEIPT_ID = '{receipt.getReceiptID()}'")
         except Exception as e:
             print(f"Error occurred in ReceiptDAL.updateReceipt(): {e}")
         return 0

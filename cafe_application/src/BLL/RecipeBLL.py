@@ -9,7 +9,7 @@ class RecipeBLL(Manager[Recipe]):
     def __init__(self):
         try:
             self.__recipeDAL = RecipeDAL()
-            self.__recipeList = self.searchRecipes()
+            self.__recipeList = self.searchRecipes("DELETED = 0")
         except Exception:
             pass
 
@@ -38,19 +38,19 @@ class RecipeBLL(Manager[Recipe]):
 
     def deleteRecipe(self, recipe: Recipe) -> bool:
         self.__recipeList.pop(self.getIndex(recipe, "RECIPE_ID", self.__recipeList))
-        return self.__recipeDAL.deleteRecipe(f"RECIPE_ID = '{recipe.getRecipeID}'") != 0
+        return self.__recipeDAL.deleteRecipe(f"RECIPE_ID = '{recipe.getRecipeID()}'") != 0
 
     def searchRecipes(self, *conditions: str) -> List[Recipe]:
         return self.__recipeDAL.searchRecipes(*conditions)
 
     def findRecipesBy(self, conditions: dict) -> list[Recipe]:
-        recipes = []
+        recipes = self.__recipeList
         for key, value in conditions.items():
             recipes = super().findObjectsBy(key, value, recipes)
         return recipes
 
     def getAutoID(self) -> str:
-        return super().getAutoID("RE", 2, self.__recipeList)
+        return super().getAutoID("RE", 3, self.searchRecipes())
 
     def getValueByKey(self, recipe: Recipe, key: str) -> object:
         return {

@@ -7,6 +7,7 @@ from DTO.Recipe import Recipe
 class RecipeDAL(Manager):
     def __init__(self):
         super().__init__("recipe", [
+            "RECIPE_ID",
             "PRODUCT_ID",
             "INGREDIENT_ID",
             "MASS",
@@ -16,6 +17,7 @@ class RecipeDAL(Manager):
 
     def convertToRecipes(self, data: List[List[object]]) -> List[Recipe]:
         return self.convert(data, lambda row: Recipe(
+            row['RECIPE_ID'],
             row['PRODUCT_ID'],
             row['INGREDIENT_ID'],
             row['MASS'],
@@ -26,6 +28,7 @@ class RecipeDAL(Manager):
     def addRecipe(self, recipe: Recipe) -> int:
         try:
             return self.create(
+                recipe.getRecipeID(),
                 recipe.getProductID(),
                 recipe.getIngredientID(),
                 recipe.getMass(),
@@ -39,13 +42,14 @@ class RecipeDAL(Manager):
     def updateRecipe(self, recipe: Recipe) -> int:
         try:
             updateValues = [
+                recipe.getRecipeID(),
                 recipe.getProductID(),
                 recipe.getIngredientID(),
                 recipe.getMass(),
                 recipe.getUnit(),
                 recipe.isDeleted()
             ]
-            return self.update(updateValues, f"PRODUCT_ID = {recipe.getProductID()}", f"INGREDIENT_ID = {recipe.getIngredientID()}")
+            return self.update(updateValues, f"RECIPE_ID = '{recipe.getRecipeID()}'")
         except Exception as e:
             print(f"Error occurred in RecipeDAL.updateRecipe(): {e}")
         return 0

@@ -49,7 +49,7 @@ class AccountDAL(Manager):
                 account.getStaffID(),
                 account.isDeleted()
             ]
-            return self.update(updateValues, f"ACCOUNT_ID = {account.getAccountID()}")
+            return self.update(updateValues, f"ACCOUNT_ID = '{account.getAccountID()}'")
         except Exception as e:
             print(f"Error occurred in AccountDAL.updateAccount(): {e}")
         return 0

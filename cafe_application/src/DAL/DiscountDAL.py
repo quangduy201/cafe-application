@@ -49,7 +49,7 @@ class DiscountDAL(Manager):
                 discount.getStatus(),
                 discount.isDeleted()
             ]
-            return self.update(updateValues, f"DISCOUNT_ID = {discount.getDiscountID()}")
+            return self.update(updateValues, f"DISCOUNT_ID = '{discount.getDiscountID()}'")
         except Exception as e:
             print(f"Error occurred in DiscountDAL.updateDiscount(): {e}")
         return 0

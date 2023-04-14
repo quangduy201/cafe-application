@@ -53,7 +53,7 @@ class SupplierDAL(Manager):
                 supplier.getPrice(),
                 supplier.isDeleted()
             ]
-            return self.update(updateValues, f"SUPPLIER_ID = {supplier.getSupplierID()}")
+            return self.update(updateValues, f"SUPPLIER_ID = '{supplier.getSupplierID()}'")
         except Exception as e:
             print(f"Error occurred in SupplierDAL.updateSupplier(): {e}")
         return 0

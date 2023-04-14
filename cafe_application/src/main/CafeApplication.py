@@ -3,9 +3,11 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from DAL.AccountDAL import AccountDAL
+from GUI.LoginGUI import LoginGUI
+from GUI.HomeGUI import HomeGUI
 from DTO.Account import Account
 
-
 def main():
-    print("Hello world!")
+    # LoginGUI()
+    HomeGUI(Account("AC003", "longbott", "123", "DE01", "ST03"))
+
