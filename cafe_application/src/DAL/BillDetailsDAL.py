@@ -13,7 +13,7 @@ class BillDetailsDAL(Manager):
         ])
 
     def convertToBillDetails(self, data: List[List[object]]) -> List[BillDetails]:
-        return self.convert(data, lambda row: BillDetailsDAL(
+        return self.convert(data, lambda row: BillDetails(
             row['BILL_ID'],
             row['PRODUCT_ID'],
             row['QUANTITY']

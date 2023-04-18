@@ -9,5 +9,5 @@ from DTO.Account import Account
 
 def main():
     # LoginGUI()
-    HomeGUI(Account("AC003", "longbott", "123", "DE01", "ST03"))
+    HomeGUI(Account('AC003', 'longbott', '123', 'DE01', 'ST03', False))
 

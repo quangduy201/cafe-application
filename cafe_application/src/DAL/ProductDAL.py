@@ -50,6 +50,7 @@ class ProductDAL(Manager):
                 product.getCategoryID(),
                 product.getSized(),
                 product.getCost(),
+                product.getImage(),
                 product.isDeleted()
             ]
             return self.update(updateValues, f"PRODUCT_ID = '{product.getProductID()}'")

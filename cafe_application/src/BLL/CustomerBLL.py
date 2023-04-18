@@ -29,9 +29,6 @@ class CustomerBLL(Manager[Customer]):
         return super().getData(self.__customerList)
 
     def addCustomer(self, customer: Customer) -> bool:
-        if (self.getIndex(customer, "PHONE", self.__customerList)) != -1:
-            print("Can't add new customer. Phone already exists.")
-            return False
         self.__customerList.append(customer)
         return self.__customerDAL.addCustomer(customer) != 0
 

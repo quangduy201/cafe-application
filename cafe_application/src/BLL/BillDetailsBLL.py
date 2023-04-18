@@ -9,7 +9,7 @@ class BillDetailsBLL(Manager[BillDetails]):
     def __init__(self):
         try:
             self.__billDetailsDAL = BillDetailsDAL()
-            self.__billDetailsList = self.searchBillDetails("DELETED = 0")
+            self.__billDetailsList = self.searchBillDetails()
         except Exception:
             pass
 
@@ -36,7 +36,7 @@ class BillDetailsBLL(Manager[BillDetails]):
         return self.__billDetailsDAL.searchBillDetails(*conditions)
 
     def findBillDetailsBy(self, conditions: dict) -> list[BillDetails]:
-        billDetails = []
+        billDetails = self.__billDetailsList
         for key, value in conditions.items():
             billDetails = super().findObjectsBy(key, value, billDetails)
         return billDetails
