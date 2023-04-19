@@ -43,7 +43,7 @@ class BillDetailsBLL(Manager[BillDetails]):
 
     def getValueByKey(self, billDetails: BillDetails, key: str) -> object:
         return {
-            "BILL_ID": billDetails.getBillDetailsID(),
+            "BILL_ID": billDetails.getBillID(),
             "PRODUCT_ID": billDetails.getProductID(),
             "QUANTITY": billDetails.getQuantity()
         }.get(key, None)

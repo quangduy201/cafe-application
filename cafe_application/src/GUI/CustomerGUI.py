@@ -83,7 +83,7 @@ class CustomerGUI(Frame):
         self.btDetection = Button(self.search, text="Tìm kiếm bằng gương mặt", width=25, bg="#AFD1DF", command=self.findByFace)
         self.btDetection.pack(pady=5)
 
-        self.record = Record(self.TextFieldsForm[0].get())
+
         self.btRecord = Button(self.pnlCustomerConfiguration, text="Đăng ký gương mặt", width=25, bg="#AFD1DF", command=self.sinupFace, state="disabled")
         self.btRecord.grid(row=self.row, column=1, padx=20, pady=10, ipady=4)
 
@@ -116,6 +116,7 @@ class CustomerGUI(Frame):
             self.btRecord.configure(state="disabled")
 
     def sinupFace(self):
+        self.record = Record(self.TextFieldsForm[0].get())
         thread = Thread(target=self.record.recording)
         thread.start()
 

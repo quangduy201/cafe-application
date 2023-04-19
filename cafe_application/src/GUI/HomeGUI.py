@@ -12,6 +12,8 @@ from GUI.IngredientGUI import IngredientGUI
 from GUI.DecentralizationGUI import DecentralizationGUI
 from GUI.SupplierGUI import SupplierGUI
 from GUI.SaleGUI import SaleGUI
+from GUI.BillGUI import BillGUI
+from GUI.ReceiptGUI import ReceiptGUI
 class HomeGUI(Frame):
     def __init__(self, account):
         self.__account = account
@@ -162,9 +164,9 @@ class HomeGUI(Frame):
         elif frame == self.panel[4]:
             self.openChildForm(RecipeGUI(self.function))
         elif frame == self.panel[5]:
-            pass
+            self.openChildForm(ReceiptGUI(self.function))
         elif frame == self.panel[6]:
-            pass
+            self.openChildForm(BillGUI(self.function))
         elif frame == self.panel[7]:
             self.openChildForm(IngredientGUI(self.function))
         elif frame == self.panel[8]:
