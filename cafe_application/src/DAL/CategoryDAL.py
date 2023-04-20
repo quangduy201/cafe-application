@@ -41,7 +41,7 @@ class CategoryDAL(Manager):
                 category.getQuantity(),
                 category.isDeleted()
             ]
-            return self.update(updateValues, f"CATEGORY_ID = {category.getCategoryID()}")
+            return self.update(updateValues, f"CATEGORY_ID = '{category.getCategoryID()}'")
         except Exception as e:
             print(f"Error occurred in CategoryDAL.updateCategory(): {e}")
         return 0

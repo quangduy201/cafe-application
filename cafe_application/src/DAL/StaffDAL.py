@@ -38,7 +38,7 @@ class StaffDAL(Manager):
             return self.create(
                 staff.getStaffID(),
                 staff.getName(),
-                staff.getGender(),
+                staff.isGender(),
                 staff.getDateOfBirth(),
                 staff.getAddress(),
                 staff.getPhone(),
@@ -56,7 +56,7 @@ class StaffDAL(Manager):
             updateValues = [
                 staff.getStaffID(),
                 staff.getName(),
-                staff.getGender(),
+                staff.isGender(),
                 staff.getDateOfBirth(),
                 staff.getAddress(),
                 staff.getPhone(),
@@ -65,7 +65,7 @@ class StaffDAL(Manager):
                 staff.getDateOfEntry(),
                 staff.isDeleted()
             ]
-            return self.update(updateValues, f"STAFF_ID = {staff.getStaffID()}")
+            return self.update(updateValues, f"STAFF_ID = '{staff.getStaffID()}'")
         except Exception as e:
             print(f"Error occurred in StaffDAL.updateStaff(): {e}")
         return 0

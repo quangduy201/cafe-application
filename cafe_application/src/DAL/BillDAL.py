@@ -43,12 +43,12 @@ class BillDAL(Manager):
     def updateBill(self, bill: Bill) -> int:
         try:
             update_values = [
+                bill.getBillID(),
                 bill.getCustomerID(),
                 bill.getStaffID(),
                 bill.getDateOfPurchase().strftime('%Y-%m-%d'),
                 bill.getTotal(),
                 bill.isDeleted(),
-                bill.getBillID(),
             ]
             return self.update(update_values, f"BILL_ID = '{bill.getBillID()}'")
         except Exception as e:

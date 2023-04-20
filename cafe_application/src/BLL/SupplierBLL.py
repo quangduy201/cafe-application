@@ -9,7 +9,7 @@ class SupplierBLL(Manager[Supplier]):
     def __init__(self):
         try:
             self.__supplierDAL = SupplierDAL()
-            self.__supplierList = self.searchSuppliers()
+            self.__supplierList = self.searchSuppliers("DELETED = 0")
         except Exception:
             pass
 
@@ -41,19 +41,19 @@ class SupplierBLL(Manager[Supplier]):
 
     def deleteSupplier(self, supplier: Supplier) -> bool:
         self.__supplierList.pop(self.getIndex(supplier, "SUPPLIER_ID", self.__supplierList))
-        return self.__supplierDAL.deleteSupplier(f"SUPPLIER_ID = '{supplier.getSupplierID}'") != 0
+        return self.__supplierDAL.deleteSupplier(f"SUPPLIER_ID = '{supplier.getSupplierID()}'") != 0
 
     def searchSuppliers(self, *conditions: str) -> List[Supplier]:
         return self.__supplierDAL.searchSuppliers(*conditions)
 
     def findSuppliersBy(self, conditions: dict) -> list[Supplier]:
-        suppliers = []
+        suppliers = self.__supplierList
         for key, value in conditions.items():
             suppliers = super().findObjectsBy(key, value, suppliers)
         return suppliers
 
     def getAutoID(self) -> str:
-        return super().getAutoID("SUP", 3, self.__supplierList)
+        return super().getAutoID("SUP", 3, self.searchSuppliers())
 
     def getValueByKey(self, supplier: Supplier, key: str) -> object:
         return {

@@ -34,7 +34,7 @@ class CustomerDAL(Manager):
             return self.create(
                 customer.getCustomerID(),
                 customer.getName(),
-                customer.getGender(),
+                customer.isGender(),
                 customer.getDateOfBirth(),
                 customer.getPhone(),
                 customer.isMembership(),
@@ -50,14 +50,14 @@ class CustomerDAL(Manager):
             updateValues = [
                 customer.getCustomerID(),
                 customer.getName(),
-                customer.getGender(),
+                customer.isGender(),
                 customer.getDateOfBirth(),
                 customer.getPhone(),
                 customer.isMembership(),
                 customer.getDateOfSup(),
                 customer.isDeleted()
             ]
-            return self.update(updateValues, f"CUSTOMER_ID = {customer.getCustomerID()}")
+            return self.update(updateValues, f"CUSTOMER_ID = '{customer.getCustomerID()}'")
         except Exception as e:
             print(f"Error occurred in CustomerDAL.updateCustomer(): {e}")
         return 0

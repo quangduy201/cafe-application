@@ -11,7 +11,7 @@ class IngredientDAL(Manager):
             "NAME",
             "QUANTITY",
             "UNIT",
-            "SUPPLIER",
+            "SUPPLIER_ID",
             "DELETED"
         ])
 
@@ -49,7 +49,7 @@ class IngredientDAL(Manager):
                 ingredient.getSupplierID(),
                 ingredient.isDeleted()
             ]
-            return self.update(updateValues, f"INGREDIENT_ID = {ingredient.getIngredientID()}")
+            return self.update(updateValues, f"INGREDIENT_ID = '{ingredient.getIngredientID()}'")
         except Exception as e:
             print(f"Error occurred in IngredientDAL.updateIngredient(): {e}")
         return 0

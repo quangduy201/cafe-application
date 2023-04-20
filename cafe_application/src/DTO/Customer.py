@@ -2,7 +2,7 @@ from datetime import date
 
 
 class Customer:
-    def __init__(self, customerID = "", name = "", gender = "", dateOfBirth = date(1, 1, 1), phone = "", membership = False, dateOfSup = date(1, 1, 1), deleted = False):
+    def __init__(self, customerID = "", name = "", gender = False, dateOfBirth = date(1, 1, 1), phone = "", membership = False, dateOfSup = date(1, 1, 1), deleted = False):
         self.__customerID = customerID
         self.__name = name
         self.__gender = gender
@@ -24,7 +24,7 @@ class Customer:
     def setName(self, name) -> None:
         self.__name = name
 
-    def getGender(self) -> str:
+    def isGender(self) -> bool:
         return self.__gender
 
     def setGender(self, gender) -> None:
@@ -61,10 +61,12 @@ class Customer:
         self.__deleted = deleted
 
     def __str__(self):
+        gender1 = "Nam" if self.__gender else "Nữ"
+        member = "Có" if self.__membership else "Không"
         return f"{self.__customerID} | " \
             + f"{self.__name} | " \
-            + f"{self.__gender} | " \
+            + f"{gender1} | " \
             + f"{self.__dateOfBirth} | " \
             + f"{self.__phone} | " \
-            + f"{self.__membership} | " \
+            + f"{member} | " \
             + f"{self.__dateOfSup}"

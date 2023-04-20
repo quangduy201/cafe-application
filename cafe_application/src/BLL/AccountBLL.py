@@ -9,7 +9,7 @@ class AccountBLL(Manager[Account]):
     def __init__(self):
         try:
             self.__accountDAL = AccountDAL()
-            self.__accountList = self.searchAccounts()
+            self.__accountList = self.searchAccounts("DELETED = 0", "ACCOUNT_ID != 'AC000'" )
         except Exception:
             pass
 
@@ -41,19 +41,19 @@ class AccountBLL(Manager[Account]):
 
     def deleteAccount(self, account: Account) -> bool:
         self.__accountList.pop(self.getIndex(account, "ACCOUNT_ID", self.__accountList))
-        return self.__accountDAL.deleteAccount(f"ACCOUNT_ID = {account.getAccountID}") != 0
+        return self.__accountDAL.deleteAccount(f"ACCOUNT_ID = '{account.getAccountID()}'") != 0
 
     def searchAccounts(self, *conditions: str) -> List[Account]:
         return self.__accountDAL.searchAccounts(*conditions)
 
     def findAccountsBy(self, conditions: dict) -> list[Account]:
-        accounts = []
+        accounts = self.__accountList
         for key, value in conditions.items():
             accounts = super().findObjectsBy(key, value, accounts)
         return accounts
 
     def getAutoID(self) -> str:
-        return super().getAutoID("AC", 3, self.__accountList)
+        return super().getAutoID("AC", 3, self.searchAccounts("ACCOUNT_ID != 'AC000'"))
 
     def getValueByKey(self, account: Account, key: str) -> object:
         return {

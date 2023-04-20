@@ -33,7 +33,7 @@ class ReceiptDetailsDAL(Manager):
             print(f"Error occurred in ReceiptDetailsDAL.addReceiptDetails(): {e}")
         return 0
 
-    def searchReceiptDetailss(self, *conditions: str) -> List[ReceiptDetails]:
+    def searchReceiptDetails(self, *conditions: str) -> List[ReceiptDetails]:
         try:
             return self.convertToReceiptDetails(self.read(*conditions))
         except Exception as e:

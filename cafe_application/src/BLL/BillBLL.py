@@ -9,7 +9,7 @@ class BillBLL(Manager[Bill]):
     def __init__(self):
         try:
             self.__billDAL = BillDAL()
-            self.__billList = self.searchBills()
+            self.__billList = self.searchBills("DELETED = 0")
         except Exception:
             pass
 
@@ -38,19 +38,19 @@ class BillBLL(Manager[Bill]):
 
     def deleteBill(self, bill: Bill) -> bool:
         self.__billList.pop(self.getIndex(bill, "BILL_ID", self.__billList))
-        return self.__billDAL.deleteBill(f"BILL_ID = '{bill.getBillID}'") != 0
+        return self.__billDAL.deleteBill(f"BILL_ID = '{bill.getBillID()}'") != 0
 
     def searchBills(self, *conditions: str) -> List[Bill]:
         return self.__billDAL.searchBills(*conditions)
 
     def findBillsBy(self, conditions: dict) -> list[Bill]:
-        bills = []
+        bills = self.__billList
         for key, value in conditions.items():
             bills = super().findObjectsBy(key, value, bills)
         return bills
 
     def getAutoID(self) -> str:
-        return super().getAutoID("BI", 4, self.__billList)
+        return super().getAutoID("BI", 4, self.searchBills())
 
     def getValueByKey(self, bill: Bill, key: str) -> object:
         return {

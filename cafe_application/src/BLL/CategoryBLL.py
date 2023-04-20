@@ -9,7 +9,7 @@ class CategoryBLL(Manager[Category]):
     def __init__(self):
         try:
             self.__categoryDAL = CategoryDAL()
-            self.__categoryList = self.searchCategories()
+            self.__categoryList = self.searchCategories("DELETED = 0")
         except Exception:
             pass
 
@@ -41,19 +41,19 @@ class CategoryBLL(Manager[Category]):
 
     def deleteCategory(self, category: Category) -> bool:
         self.__categoryList.pop(self.getIndex(category, "CATEGORY_ID", self.__categoryList))
-        return self.__categoryDAL.deleteCategory(f"CATEGORY_ID = '{category.getCategoryID}'") != 0
+        return self.__categoryDAL.deleteCategory(f"CATEGORY_ID = '{category.getCategoryID()}'") != 0
 
     def searchCategories(self, *conditions: str) -> List[Category]:
         return self.__categoryDAL.searchCategories(*conditions)
 
     def findCategoriesBy(self, conditions: dict) -> list[Category]:
-        categories = []
+        categories = self.__categoryList
         for key, value in conditions.items():
             categories = super().findObjectsBy(key, value, categories)
         return categories
 
     def getAutoID(self) -> str:
-        return super().getAutoID("CA", 2, self.__categoryList)
+        return super().getAutoID("CA", 2, self.searchCategories())
 
     def getValueByKey(self, category: Category, key: str) -> object:
         return {

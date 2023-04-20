@@ -9,7 +9,7 @@ class ReceiptDetailsBLL(Manager[ReceiptDetails]):
     def __init__(self):
         try:
             self.__receiptDetailsDAL = ReceiptDetailsDAL()
-            self.__receiptDetailsList = self.searchReceiptDetailsDetails()
+            self.__receiptDetailsList = self.searchReceiptDetails()
         except Exception:
             pass
 
@@ -32,18 +32,18 @@ class ReceiptDetailsBLL(Manager[ReceiptDetails]):
         self.__receiptDetailsList.append(receiptDetails)
         return self.__receiptDetailsDAL.addReceiptDetails(receiptDetails) != 0
 
-    def searchReceiptDetailsDetails(self, *conditions: str) -> List[ReceiptDetails]:
-        return self.__receiptDetailsDAL.searchReceiptDetailsDetails(*conditions)
+    def searchReceiptDetails(self, *conditions: str) -> List[ReceiptDetails]:
+        return self.__receiptDetailsDAL.searchReceiptDetails(*conditions)
 
-    def findReceiptDetailsDetailsBy(self, conditions: dict) -> list[ReceiptDetails]:
-        receiptDetailsDetails = []
+    def findReceiptDetailsBy(self, conditions: dict) -> list[ReceiptDetails]:
+        receiptDetails = self.__receiptDetailsList
         for key, value in conditions.items():
-            receiptDetailsDetails = super().findObjectsBy(key, value, receiptDetailsDetails)
-        return receiptDetailsDetails
+            receiptDetails = super().findObjectsBy(key, value, receiptDetails)
+        return receiptDetails
 
     def getValueByKey(self, receiptDetails: ReceiptDetails, key: str) -> object:
         return {
-            "RECEIPTDETAILS_ID": receiptDetails.getReceiptDetailsID(),
+            "RECEIPT_ID": receiptDetails.getReceiptID(),
             "INGREDIENT_ID": receiptDetails.getIngredientID(),
             "QUANTITY": receiptDetails.getQuantity(),
             "SUPPLIER_ID": receiptDetails.getSupplierID()

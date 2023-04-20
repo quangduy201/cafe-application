@@ -48,11 +48,12 @@ class ProductDAL(Manager):
                 product.getProductID(),
                 product.getName(),
                 product.getCategoryID(),
-                product.getSize(),
+                product.getSized(),
                 product.getCost(),
+                product.getImage(),
                 product.isDeleted()
             ]
-            return self.update(updateValues, f"PRODUCT_ID = {product.getProductID()}")
+            return self.update(updateValues, f"PRODUCT_ID = '{product.getProductID()}'")
         except Exception as e:
             print(f"Error occurred in ProductDAL.updateProduct(): {e}")
         return 0

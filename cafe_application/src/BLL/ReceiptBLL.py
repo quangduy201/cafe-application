@@ -9,7 +9,7 @@ class ReceiptBLL(Manager[Receipt]):
     def __init__(self):
         try:
             self.__receiptDAL = ReceiptDAL()
-            self.__receiptList = self.searchReceipts()
+            self.__receiptList = self.searchReceipts("DELETED = 0")
         except Exception:
             pass
 
@@ -38,7 +38,7 @@ class ReceiptBLL(Manager[Receipt]):
 
     def deleteReceipt(self, receipt: Receipt) -> bool:
         self.__receiptList.pop(self.getIndex(receipt, "RECEIPT_ID", self.__receiptList))
-        return self.__receiptDAL.deleteReceipt(f"RECEIPT_ID = '{receipt.getReceiptID}'") != 0
+        return self.__receiptDAL.deleteReceipt(f"RECEIPT_ID = '{receipt.getReceiptID()}'") != 0
 
     def searchReceipts(self, *conditions: str) -> List[Receipt]:
         return self.__receiptDAL.searchReceipts(*conditions)
@@ -50,7 +50,7 @@ class ReceiptBLL(Manager[Receipt]):
         return receipts
 
     def getAutoID(self) -> str:
-        return super().getAutoID("REC", 3, self.__receiptList)
+        return super().getAutoID("REC", 3, self.searchReceipts())
 
     def getValueByKey(self, receipt: Receipt, key: str) -> object:
         return {
