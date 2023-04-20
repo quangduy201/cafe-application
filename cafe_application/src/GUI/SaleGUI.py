@@ -97,6 +97,21 @@ class SaleGUI(Frame):
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].insert(0, self.billBLL.getAutoID())
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].configure(state='readonly')
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+            elif self.columnNames[i] == "CUSTOMER_ID":
+                self.TextFieldsForm.append(Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30))
+                self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+
+                self.row = self.row + 1
+                self.column = 0
+
+                self.nameLabel = Label(self.pnlBillConfiguration, text="NAME: ", fg="#000000", bg="#ffffff")
+                self.nameLabel.grid(row=self.row, column=self.column, padx=20, pady=10)
+
+                self.column = self.column + 1
+
+                self.customerName = Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30, state="disabled")
+                self.customerName.grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+
             elif self.columnNames[i] == "STAFF_ID":
                 self.cbbStaffID = ttk.Combobox(self.pnlBillConfiguration, values=self.staffsID, width=27)
                 self.cbbStaffID.configure(state="readonly")
@@ -118,7 +133,7 @@ class SaleGUI(Frame):
             self.row = self.row + 1
             self.column = 0
 
-        self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=400, highlightthickness=0, borderwidth=0)
+        self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=350, highlightthickness=0, borderwidth=0)
         self.billDetails.pack(padx=10, pady=10, fill=BOTH, expand=True)
         self.billDetails.pack_propagate(False)
 
@@ -209,7 +224,7 @@ class SaleGUI(Frame):
         self.ref()
 
     def dec(self):
-        thread = Thread(target=self.detection.detect)
+        thread = Thread(target=self.detection.detect(self.customerName))
         thread.start()
 
     def on_wheelCanvas(self, event):
