@@ -41,6 +41,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`ACCOUNT_ID`, `USERNAME`, `PASSWD`, `DECENTRALIZATION_ID`, `STAFF_ID`, `DELETED`) VALUES
+('AC000', 'admin', 'admin', 'DE00', 'ST00', b'0'),
 ('AC001', 'dungboi', '123', 'DE01', 'ST01', b'0'),
 ('AC010', 'zidan', '123', 'DE01', 'ST04', b'0'),
 ('AC002', 'legiang', '123', 'DE04', 'ST08', b'0'),
@@ -217,6 +218,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`CUSTOMER_ID`, `NAME`, `GENDER`, `DOB`, `PHONE`, `MEMBERSHIP`, `DOSUP`, `DELETED`) VALUES
+('CUS000', 'VÃNG LAI', b'1', '0100-01-01', '', b'0', '0100-01-01', b'0'),
 ('CUS001', 'NGUYỄN VĂN NAM', b'1', '2000-12-01', '0862994282', b'1', '2020-09-08', b'0'),
 ('CUS002', 'HOÀNG XUÂN BẮC', b'1', '2001-09-03', '096756326', b'1', '2021-02-07', b'0'),
 ('CUS003', 'NGUYỄN THỊ THU HIỀN', b'0', '2004-05-04', '0981485618', b'0', '2021-05-06', b'0'),
@@ -236,7 +238,6 @@ INSERT INTO `customer` (`CUSTOMER_ID`, `NAME`, `GENDER`, `DOB`, `PHONE`, `MEMBER
 
 CREATE TABLE `decentralization` (
   `DECENTRALIZATION_ID` varchar(10) NOT NULL,
-
   `IS_SALE` int(1) DEFAULT NULL,
   `IS_PRODUCT` int(1) DEFAULT NULL,
   `IS_CATEGORY` int(1) DEFAULT NULL,
@@ -259,6 +260,7 @@ CREATE TABLE `decentralization` (
 --
 
 INSERT INTO `decentralization` (`DECENTRALIZATION_ID`, `IS_SALE`, `IS_PRODUCT`, `IS_CATEGORY`, `IS_RECIPE`, `IS_IMPORT`, `IS_SUPPLIER`, `IS_BILL`, `IS_WAREHOUSES`, `IS_ACCOUNT`, `IS_STAFF`, `IS_CUSTOMER`, `IS_DISCOUNT`, `IS_DECENTRALIZE`, `DECENTRALIZATION_NAME`) VALUES
+('DE00', 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'admin'),
 ('DE01', 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'manager'),
 ('DE02', 1, 2, 2, 0, 0, 1, 2, 0, 0, 0, 2, 0, 0, 'staffSale'),
 ('DE03', 1, 0, 0, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 'staffWarehousing'),
@@ -757,6 +759,7 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`STAFF_ID`, `NAME`, `GENDER`, `DOB`, `ADDRESS`, `PHONE`, `EMAIL`, `SALARY`, `DOENTRY`, `DELETED`) VALUES
+('ST00', 'ADMIN', b'0', '0100-01-01', '', '', '', 0, '0100-01-01', b'0'),
 ('ST01', 'NGUYỄN TIẾN DŨNG', b'1', '2003-12-19', '2019-1-1', '0812535278', 'dungboi@gmail.com', 0, '0100-01-01', b'0'),
 ('ST02', 'ĐINH QUANG DUY', b'1', '2023-01-20', '2019-1-1', '0834527892', 'quangduy@gmail.com', 0, '0100-01-01', b'0'),
 ('ST03', 'NGUYỄN HOÀNG LONG', b'1', '2003-08-30', '2019-1-1', '0359872569', 'longbot@gmail.com', 0, '0100-01-01', b'0'),

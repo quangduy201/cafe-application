@@ -11,7 +11,7 @@ class MySQL:
                 host="localhost",
                 user="root",
                 password="",
-                database="cafe-management"
+                database="cafe_management"
             )
             self.__cursor = self.__connection.cursor()
         except Error as e:

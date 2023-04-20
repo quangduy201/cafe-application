@@ -1,9 +1,10 @@
-from tkinter import ttk
 from tkinter import *
-from tkinter import messagebox
-from PIL import Image, ImageTk
+from tkinter import messagebox, ttk
+
 from BLL.AccountBLL import AccountBLL
 from GUI.HomeGUI import HomeGUI
+from PIL import Image, ImageTk
+
 
 class LoginGUI(Frame):
     def __init__(self):
@@ -113,8 +114,3 @@ class LoginGUI(Frame):
             messagebox.showinfo("Message", "Login successful!")
             self.__master.destroy()
             HomeGUI(account)
-
-
-
-
-

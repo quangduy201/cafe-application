@@ -9,7 +9,7 @@ class StaffBLL(Manager[Staff]):
     def __init__(self):
         try:
             self.__staffDAL = StaffDAL()
-            self.__staffList = self.searchStaffs("DELETED = 0")
+            self.__staffList = self.searchStaffs("DELETED = 0", "STAFF_ID != 'ST00'")
         except Exception:
             pass
 
@@ -53,7 +53,7 @@ class StaffBLL(Manager[Staff]):
         return staffs
 
     def getAutoID(self) -> str:
-        return super().getAutoID("ST", 2, self.searchStaffs())
+        return super().getAutoID("ST", 2, self.searchStaffs("STAFF_ID != 'ST00'"))
 
     def getValueByKey(self, staff: Staff, key: str) -> object:
         return {

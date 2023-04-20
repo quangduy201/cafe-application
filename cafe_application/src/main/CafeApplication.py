@@ -3,11 +3,12 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from GUI.LoginGUI import LoginGUI
-from GUI.HomeGUI import HomeGUI
 from DTO.Account import Account
+from GUI.HomeGUI import HomeGUI
+from GUI.LoginGUI import LoginGUI
+
 
 def main():
     # LoginGUI()
-    HomeGUI(Account('AC003', 'longbott', '123', 'DE01', 'ST03', False))
+    HomeGUI(Account('AC000', 'admin', 'admin', 'DE00', 'ST00', False))
 

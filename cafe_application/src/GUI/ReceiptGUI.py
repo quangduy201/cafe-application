@@ -1,13 +1,16 @@
+from datetime import datetime
 from tkinter import *
 from tkinter import ttk
-from datetime import datetime
+
+from BLL.IngredientBLL import IngredientBLL
 from BLL.ReceiptBLL import ReceiptBLL
 from BLL.ReceiptDetailsBLL import ReceiptDetailsBLL
 from BLL.StaffBLL import StaffBLL
 from BLL.SupplierBLL import SupplierBLL
-from BLL.IngredientBLL import IngredientBLL
 from DTO.Receipt import Receipt
 from DTO.ReceiptDetails import ReceiptDetails
+
+
 class ReceiptGUI(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg="blue", width=200, height=720)
@@ -90,7 +93,7 @@ class ReceiptGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlReceiptConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.receiptDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=300, highlightthickness=0, borderwidth=0)
@@ -159,7 +162,7 @@ class ReceiptGUI(Frame):
         self.row = 0
         self.column = 0
 
-        self.receiptDetailsList = self.receiptDetailsBLL.findReceiptDetailsBy({"RECEIPT_ID" : self.TextFieldsForm[0].get()})
+        self.receiptDetailsList = self.receiptDetailsBLL.findReceiptDetailsBy({"RECEIPT_ID": self.TextFieldsForm[0].get()})
         for receiptDetails in self.receiptDetailsList:
 
             self.labelReceiptDetails.append(Label(self.frameInCanvas1, text="INGREDIENT_ID: ", fg="#000000", bg="#ffffff"))
@@ -172,7 +175,7 @@ class ReceiptGUI(Frame):
             self.cbbReceiptDetails[len(self.cbbReceiptDetails)-1].configure(state='disabled')
             self.cbbReceiptDetails[len(self.cbbReceiptDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.labelReceiptDetails.append(Label(self.frameInCanvas1, text="QUANTITY: ", fg="#000000", bg="#ffffff"))
@@ -185,7 +188,7 @@ class ReceiptGUI(Frame):
             self.TextFieldsReceiptDetails[len(self.TextFieldsReceiptDetails)-1].configure(state='disabled')
             self.TextFieldsReceiptDetails[len(self.TextFieldsReceiptDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.labelReceiptDetails.append(Label(self.frameInCanvas1, text="SUPPLIER_ID: ", fg="#000000", bg="#ffffff"))
@@ -197,7 +200,7 @@ class ReceiptGUI(Frame):
             self.cbbReceiptDetails[len(self.cbbReceiptDetails)-1].insert(0, receiptDetails.getSupplierID())
             self.cbbReceiptDetails[len(self.cbbReceiptDetails)-1].configure(state='disabled')
             self.cbbReceiptDetails[len(self.cbbReceiptDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.btAdd.configure(state="disabled")

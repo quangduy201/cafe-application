@@ -1,11 +1,14 @@
+from datetime import datetime
+from threading import Thread
 from tkinter import *
 from tkinter import ttk
+
 from BLL.CustomerBLL import CustomerBLL
-from DTO.Customer import Customer
-from datetime import datetime
-from detection.record import Record
 from detection.detection import Detection
-from threading import Thread
+from detection.record import Record
+from DTO.Customer import Customer
+
+
 class CustomerGUI(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg="blue", width=200, height=720)
@@ -76,7 +79,7 @@ class CustomerGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlCustomerConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.detection = Detection(self.TextFieldsForm)

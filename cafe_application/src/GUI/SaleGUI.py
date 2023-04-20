@@ -1,16 +1,18 @@
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from PIL import Image, ImageTk
-from detection.detection import Detection
 from datetime import datetime
+from threading import Thread
+from tkinter import *
+from tkinter import messagebox, ttk
+
 from BLL.BillBLL import BillBLL
 from BLL.BillDetailsBLL import BillDetailsBLL
-from BLL.StaffBLL import StaffBLL
 from BLL.ProductBLL import ProductBLL
+from BLL.StaffBLL import StaffBLL
+from detection.detection import Detection
 from DTO.Bill import Bill
 from DTO.BillDetails import BillDetails
-from threading import Thread
+from PIL import Image, ImageTk
+
+
 class SaleGUI(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg="blue", width=200, height=720)
@@ -113,7 +115,7 @@ class SaleGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=400, highlightthickness=0, borderwidth=0)
@@ -129,7 +131,7 @@ class SaleGUI(Frame):
 
 
         self.frameInCanvas1 = Frame(self.canvas1, bg="#FFFFFF", width=660, height=720, highlightthickness=2, highlightbackground="black")
-        self.canvas1.create_window((0,0), window=self.frameInCanvas1, anchor="nw")
+        self.canvas1.create_window((0, 0), window=self.frameInCanvas1, anchor="nw")
         self.frameInCanvas1.bind("<Configure>", lambda event, canvas=self.canvas1: canvas.configure(scrollregion=canvas.bbox("all")))
 
         self.labelBillDetails = []
@@ -166,7 +168,7 @@ class SaleGUI(Frame):
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].configure(state='readonly')
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.labelBillDetails.append(Label(self.frameInCanvas1, text="QUANTITY: ", fg="#000000", bg="#ffffff"))
@@ -179,7 +181,7 @@ class SaleGUI(Frame):
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].bind('<Return>', self.calculate)
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.calculate(event=None)
@@ -211,7 +213,7 @@ class SaleGUI(Frame):
         thread.start()
 
     def on_wheelCanvas(self, event):
-        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        self.canvas.yview_scroll(int(-1 * (event.delta/120)), "units")
 
     def ref(self):
         self.TextFieldsForm[0].configure(state="normal")

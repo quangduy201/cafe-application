@@ -9,7 +9,7 @@ class CustomerBLL(Manager[Customer]):
     def __init__(self):
         try:
             self.__customerDAL = CustomerDAL()
-            self.__customerList = self.searchCustomers("DELETED = 0")
+            self.__customerList = self.searchCustomers("DELETED = 0", "CUSTOMER_ID != 'CUS000'")
         except Exception:
             pass
 
@@ -50,7 +50,7 @@ class CustomerBLL(Manager[Customer]):
         return customers
 
     def getAutoID(self) -> str:
-        return super().getAutoID("CUS", 3, self.searchCustomers())
+        return super().getAutoID("CUS", 3, self.searchCustomers("CUSTOMER_ID != 'CUS000'"))
 
     def getValueByKey(self, customer: Customer, key: str) -> object:
         return {

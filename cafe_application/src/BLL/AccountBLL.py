@@ -9,7 +9,7 @@ class AccountBLL(Manager[Account]):
     def __init__(self):
         try:
             self.__accountDAL = AccountDAL()
-            self.__accountList = self.searchAccounts("DELETED = 0")
+            self.__accountList = self.searchAccounts("DELETED = 0", "ACCOUNT_ID != 'AC000'" )
         except Exception:
             pass
 
@@ -53,7 +53,7 @@ class AccountBLL(Manager[Account]):
         return accounts
 
     def getAutoID(self) -> str:
-        return super().getAutoID("AC", 3, self.searchAccounts())
+        return super().getAutoID("AC", 3, self.searchAccounts("ACCOUNT_ID != 'AC000'"))
 
     def getValueByKey(self, account: Account, key: str) -> object:
         return {

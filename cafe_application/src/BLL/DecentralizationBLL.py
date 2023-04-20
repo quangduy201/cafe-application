@@ -9,7 +9,7 @@ class DecentralizationBLL(Manager[Decentralization]):
     def __init__(self):
         try:
             self.__decentralizationDAL = DecentralizationDAL()
-            self.__decentralizationList = self.searchDecentralizations("DELETED = 0")
+            self.__decentralizationList = self.searchDecentralizations("DELETED = 0", "DECENTRALIZATION_ID != 'DE00'")
         except Exception:
             pass
 
@@ -53,7 +53,7 @@ class DecentralizationBLL(Manager[Decentralization]):
         return decentralizations
 
     def getAutoID(self) -> str:
-        return super().getAutoID("DE", 2, self.searchDecentralizations())
+        return super().getAutoID("DE", 2, self.searchDecentralizations("DECENTRALIZATION_ID != 'DE00'"))
 
     def getValueByKey(self, decentralization: Decentralization, key: str) -> object:
         return {

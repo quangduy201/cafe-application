@@ -1,13 +1,16 @@
+from datetime import datetime
+from threading import Thread
 from tkinter import *
 from tkinter import ttk
-from detection.detection import Detection
-from datetime import datetime
+
 from BLL.BillBLL import BillBLL
 from BLL.BillDetailsBLL import BillDetailsBLL
-from BLL.StaffBLL import StaffBLL
 from BLL.CustomerBLL import CustomerBLL
+from BLL.StaffBLL import StaffBLL
+from detection.detection import Detection
 from DTO.Bill import Bill
-from threading import Thread
+
+
 class BillGUI(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg="blue", width=200, height=720)
@@ -87,7 +90,7 @@ class BillGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=300, highlightthickness=0, borderwidth=0)
@@ -158,7 +161,7 @@ class BillGUI(Frame):
         self.row = 0
         self.column = 0
 
-        self.billDetailsList = self.billDetailsBLL.findBillDetailsBy({"BILL_ID" : self.TextFieldsForm[0].get()})
+        self.billDetailsList = self.billDetailsBLL.findBillDetailsBy({"BILL_ID": self.TextFieldsForm[0].get()})
         for billDetails in self.billDetailsList:
 
             self.labelBillDetails.append(Label(self.frameInCanvas1, text="PRODUCT_ID: ", fg="#000000", bg="#ffffff"))
@@ -171,7 +174,7 @@ class BillGUI(Frame):
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].configure(state='readonly')
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.labelBillDetails.append(Label(self.frameInCanvas1, text="QUANTITY: ", fg="#000000", bg="#ffffff"))
@@ -184,7 +187,7 @@ class BillGUI(Frame):
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].configure(state='readonly')
             self.TextFieldsBillDetails[len(self.TextFieldsBillDetails)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
             self.btUpd.configure(state="normal")
@@ -242,4 +245,3 @@ class BillGUI(Frame):
 
         self.btUpd.configure(state="disabled")
         self.btDel.configure(state="disabled")
-

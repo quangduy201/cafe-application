@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+
 from BLL.SupplierBLL import SupplierBLL
 from DTO.Supplier import Supplier
+
 
 class SupplierGUI(Frame):
     def __init__(self, parent):
@@ -60,7 +62,7 @@ class SupplierGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlSupplierConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.showImage = Frame(self.panel2, width=350, height=150, bg="#FFFFFF")

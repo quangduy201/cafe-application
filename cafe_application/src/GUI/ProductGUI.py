@@ -1,11 +1,13 @@
 import os
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog
-from BLL.ProductBLL import ProductBLL
+from tkinter import filedialog, ttk
+
 from BLL.CategoryBLL import CategoryBLL
+from BLL.ProductBLL import ProductBLL
 from DTO.Product import Product
 from PIL import Image, ImageTk
+
+
 class ProductGUI(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg="#333333", width=1040, height=740)
@@ -77,7 +79,7 @@ class ProductGUI(Frame):
                 self.TextFieldsForm.append(Entry(self.pnlProductConfiguration, fg="#000000", bg="#ffffff", width=30))
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
         self.showImage = Frame(self.panel2, width=350, height=250, bg="#FFFFFF")

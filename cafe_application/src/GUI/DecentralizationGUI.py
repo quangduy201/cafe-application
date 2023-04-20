@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+
 from BLL.DecentralizationBLL import DecentralizationBLL
 from DTO.Decentralization import Decentralization
+
 
 class DecentralizationGUI(Frame):
     def __init__(self, parent):
@@ -81,7 +83,7 @@ class DecentralizationGUI(Frame):
                 self.cbbForm[len(self.cbbForm)-1].configure(state="readonly")
                 self.cbbForm[len(self.cbbForm)-1].grid(row=self.row, column=self.column, padx=5, pady=10, ipady=4)
 
-            self.row = self.row +1
+            self.row = self.row + 1
             self.column = 0
 
 
@@ -117,7 +119,7 @@ class DecentralizationGUI(Frame):
             self.TextFieldsForm[1].insert(END, values[13])
 
             for i in range(0,len(self.cbbForm)):
-                self.cbbForm[i].set(values[i+1])
+                self.cbbForm[i].set(values[i + 1])
 
             self.btAdd.configure(state="disabled")
             self.btUpd.configure(state="normal")

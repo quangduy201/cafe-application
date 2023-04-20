@@ -1,19 +1,22 @@
 from tkinter import *
-from PIL import Image, ImageTk
+
 from BLL.DecentralizationBLL import DecentralizationBLL
 from BLL.StaffBLL import StaffBLL
-from GUI.ProductGUI import ProductGUI
-from GUI.CustomerGUI import CustomerGUI
-from GUI.StaffGUI import StaffGUI
-from GUI.CategoryGUI import CategoryGUI
 from GUI.AccountGUI import AccountGUI
-from GUI.RecipeGUI import RecipeGUI
-from GUI.IngredientGUI import IngredientGUI
-from GUI.DecentralizationGUI import DecentralizationGUI
-from GUI.SupplierGUI import SupplierGUI
-from GUI.SaleGUI import SaleGUI
 from GUI.BillGUI import BillGUI
+from GUI.CategoryGUI import CategoryGUI
+from GUI.CustomerGUI import CustomerGUI
+from GUI.DecentralizationGUI import DecentralizationGUI
+from GUI.IngredientGUI import IngredientGUI
+from GUI.ProductGUI import ProductGUI
 from GUI.ReceiptGUI import ReceiptGUI
+from GUI.RecipeGUI import RecipeGUI
+from GUI.SaleGUI import SaleGUI
+from GUI.StaffGUI import StaffGUI
+from GUI.SupplierGUI import SupplierGUI
+from PIL import Image, ImageTk
+
+
 class HomeGUI(Frame):
     def __init__(self, account):
         self.__account = account
@@ -21,20 +24,20 @@ class HomeGUI(Frame):
         self.__decentralization = DecentralizationBLL().searchDecentralizations("DECENTRALIZATION_ID = '" + self.__account.getDecentralizationID() + "'")[0]
         self.__arr = []
         self.__arr.append(0)
-        self.__arr.append(self.__decentralization.getIsSale());
-        self.__arr.append(self.__decentralization.getIsProduct());
-        self.__arr.append(self.__decentralization.getIsCategory());
-        self.__arr.append(self.__decentralization.getIsRecipe());
-        self.__arr.append(self.__decentralization.getIsImport());
-        self.__arr.append(self.__decentralization.getIsBill());
-        self.__arr.append(self.__decentralization.getIsWarehouses());
-        self.__arr.append(self.__decentralization.getIsDecentralize());
-        self.__arr.append(self.__decentralization.getIsAccount());
-        self.__arr.append(self.__decentralization.getIsStaff());
-        self.__arr.append(self.__decentralization.getIsCustomer());
-        self.__arr.append(self.__decentralization.getIsDiscount());
-        self.__arr.append(self.__decentralization.getIsDecentralize());
-        self.__arr.append(1);
+        self.__arr.append(self.__decentralization.getIsSale())
+        self.__arr.append(self.__decentralization.getIsProduct())
+        self.__arr.append(self.__decentralization.getIsCategory())
+        self.__arr.append(self.__decentralization.getIsRecipe())
+        self.__arr.append(self.__decentralization.getIsImport())
+        self.__arr.append(self.__decentralization.getIsBill())
+        self.__arr.append(self.__decentralization.getIsWarehouses())
+        self.__arr.append(self.__decentralization.getIsDecentralize())
+        self.__arr.append(self.__decentralization.getIsAccount())
+        self.__arr.append(self.__decentralization.getIsStaff())
+        self.__arr.append(self.__decentralization.getIsCustomer())
+        self.__arr.append(self.__decentralization.getIsDiscount())
+        self.__arr.append(self.__decentralization.getIsDecentralize())
+        self.__arr.append(1)
 
         self.__master = Tk()
         self.init_components()

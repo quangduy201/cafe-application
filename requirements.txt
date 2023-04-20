@@ -1,5 +1,5 @@
 mysql-connector-python
-opencv-python-headless
-keras
-tensorflow
+opencv-python
+opencv-contrib-python
 tk
+pillow
