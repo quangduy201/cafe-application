@@ -13,8 +13,8 @@ ___
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
-- [License](#license)
 - [External Dependencies](#external-dependencies)
+- [License](#license)
 
 ___
 
@@ -29,7 +29,9 @@ ___
 
 ## Installation
 To install the Cafe Management application, follow these steps:
-- Clone the repository to your local machine.
+- Clone the repository to your local machine (VSCode is recommended).
+- Open a terminal at the project folder and type this: `python ./setup.py` to create a virtual environment (venv)
+- Activate the venv: `./venv/Scripts/activate`
 - Install the required dependencies: `pip install -r requirements.txt`
 - Create a MySQL database named `cafe_management` and run this [`SQL`](cafe_application/database/cafe_db.sql) file.
 - Configure this [`MySQL`](cafe_application/src/DAL/MySQL.py) class to connect to your MySQL database.
@@ -56,7 +58,7 @@ The following contributors have contributed to the Cafe Management:
 ___
 
 ## External Dependencies
-Look up this file [`requirement.txt](requirements.txt) to see the dependencies
+Look up this file [`requirement.txt`](requirements.txt) to see the dependencies
 
 ___
 
