@@ -1,3 +1,4 @@
+import os
 from typing import List
 
 from BLL.Manager import Manager
@@ -37,6 +38,17 @@ class CustomerBLL(Manager[Customer]):
         return self.__customerDAL.updateCustomer(customer) != 0
 
     def deleteCustomer(self, customer: Customer) -> bool:
+        try:
+            os.remove(fr'cafe_application\classifiers\{customer.getCustomerID()}.xml')
+        except:
+            pass
+        try:
+            img_dir = fr'cafe_application\img\faces\{customer.getCustomerID()}'
+            for file in os.listdir(img_dir):
+                os.remove(fr'{img_dir}\{file}')
+            os.rmdir(img_dir)
+        except:
+            pass
         self.__customerList.pop(self.getIndex(customer, "CUSTOMER_ID", self.__customerList))
         return self.__customerDAL.deleteCustomer(f"CUSTOMER_ID = '{customer.getCustomerID()}'") != 0
 

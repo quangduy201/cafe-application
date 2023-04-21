@@ -62,7 +62,7 @@ class HomeGUI(Frame):
         self.info = Frame(self.west, bg="#333333", width=280, height=80)
         self.info.place(x=10, y=10)
 
-        self.imgAvartar = ImageTk.PhotoImage(Image.open("cafe_application\\img\\bell-boy.png").resize((60, 60), Image.ANTIALIAS))
+        self.imgAvartar = ImageTk.PhotoImage(Image.open(r"cafe_application\img\icons\bell-boy.png").resize((60, 60), Image.ANTIALIAS))
 
         self.avatar = Label(self.info, image=self.imgAvartar, bg="#333333")
         self.avatar.place(x=10, y=10)
@@ -72,6 +72,11 @@ class HomeGUI(Frame):
         self.rule = Label(self.info, text="Vai trò: " + self.__decentralization.getDecentralizationName(), font=("Tahoma", 10), fg="#ffffff", bg="#333333")
         self.rule.place(x=80, y=40)
 
+        self.imgMode = ImageTk.PhotoImage(Image.open(r"cafe_application\img\icons\sun.png").resize((30, 30), Image.ANTIALIAS))
+        self.mode = Label(self.info, image=self.imgMode, bg="#333333")
+        self.mode.bind('<Button-1>', self.changeMode)
+        self.mode.place(x=230, y=40)
+        self.darkMode = True
 
         self.fram_cate = Frame(self.west, bg="#333333", width=280, height=650)
         self.fram_cate.place(x=10, y=100)
@@ -107,7 +112,7 @@ class HomeGUI(Frame):
         self.icon.append(None)
         self.image.append(None)
         for i in range(1, 14):
-            url = "cafe_application\\img\\0" + str(i) + ".png"
+            url = fr"cafe_application\img\icons\{i:02}.png"
             self.icon.append(ImageTk.PhotoImage(Image.open(url).resize((30, 30), Image.ANTIALIAS)))
             self.image.append(Label(self.panel[i], image=self.icon[i], bg="#333333"))
         self.icon.append(ImageTk.PhotoImage(Image.open(url).resize((30, 30), Image.ANTIALIAS)))
@@ -134,6 +139,47 @@ class HomeGUI(Frame):
 
         self.__master.mainloop()
 
+    def changeMode(self, event):
+        if self.darkMode:
+            self.imgMode = ImageTk.PhotoImage(Image.open(r"cafe_application\img\icons\moon.png").resize((30, 30), Image.ANTIALIAS))
+            self.mode.configure(image=self.imgMode, bg="#4fc235")
+
+            self.__master.configure(bg="#ffffff")
+            self.west.configure(bg="#ffffff")
+
+            self.info.configure(bg="#4fc235")
+            self.avatar.configure(bg="#4fc235")
+            self.name.configure(bg="#4fc235")
+            self.rule.configure(bg="#4fc235")
+            self.fram_cate.configure(bg="#4fc235")
+            self.cate.configure(bg="#4fc235")
+
+            for i in range(1, 15):
+                self.panel[i].configure(bg="#f0f0f0")
+                self.image[i].configure(bg="#f0f0f0")
+                self.label[i].configure(bg="#f0f0f0", fg="#000000")
+
+            self.darkMode = False
+        else:
+            self.imgMode = ImageTk.PhotoImage(Image.open(r"cafe_application\img\icons\sun.png").resize((30, 30), Image.ANTIALIAS))
+            self.mode.configure(image=self.imgMode, bg="#333333")
+
+            self.__master.configure(bg="#23a661")
+            self.west.configure(bg="#23a661")
+
+            self.info.configure(bg="#333333")
+            self.avatar.configure(bg="#333333")
+            self.name.configure(bg="#333333")
+            self.rule.configure(bg="#333333")
+            self.fram_cate.configure(bg="#333333")
+            self.cate.configure(bg="#333333")
+
+            for i in range(1, 15):
+                self.panel[i].configure(bg="#333333")
+                self.image[i].configure(bg="#333333")
+                self.label[i].configure(bg="#333333", fg="#FFFFFF")
+
+            self.darkMode = True
 
     def on_panel_click(self, event):
         self.disable()
@@ -144,18 +190,31 @@ class HomeGUI(Frame):
 
     def on_childPanel_click(self, event):
         self.disable()
-        parent_frame = event.widget.master
-        for child in parent_frame.winfo_children():
-            child.configure(background='#23a661')
-        parent_frame.configure(background='#23a661')
-        self.callChildFrom(parent_frame)
+        if self.darkMode:
+            parent_frame = event.widget.master
+            for child in parent_frame.winfo_children():
+                child.configure(background='#23a661')
+            parent_frame.configure(background='#23a661')
+            self.callChildFrom(parent_frame)
+        else:
+            parent_frame = event.widget.master
+            for child in parent_frame.winfo_children():
+                child.configure(background='#44963C')
+            parent_frame.configure(background='#44963C')
+            self.callChildFrom(parent_frame)
 
     def disable(self):
         frame = self.cate
-        for child1 in frame.winfo_children():
-            child1.configure(background='#333333')
-            for child2 in child1.winfo_children():
-                child2.configure(background='#333333')
+        if self.darkMode:
+            for child1 in frame.winfo_children():
+                child1.configure(background='#333333')
+                for child2 in child1.winfo_children():
+                    child2.configure(background='#333333')
+        else:
+            for child1 in frame.winfo_children():
+                child1.configure(background='#f0f0f0')
+                for child2 in child1.winfo_children():
+                    child2.configure(background='#f0f0f0')
 
     def callChildFrom(self, frame):
         if frame == self.panel[1]:
