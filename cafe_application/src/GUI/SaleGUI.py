@@ -252,8 +252,6 @@ class SaleGUI(Frame):
             self.customerName.delete(0, END)
             self.customerName.configure(state='disabled')
 
-
-
     def ref(self):
         self.TextFieldsForm[0].configure(state="normal")
         self.TextFieldsForm[0].delete(0, END)
