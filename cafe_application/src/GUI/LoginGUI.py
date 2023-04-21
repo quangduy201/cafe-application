@@ -40,7 +40,7 @@ class LoginGUI(Frame):
         self.panel2 = Frame(self.contentPane, bg="#23a661", width=300, height=400)
         self.panel2.pack(side='left')
 
-        self.logo = Image.open("cafe_application\img\logo_cafe.png")
+        self.logo = Image.open(r"cafe_application\img\logo_cafe.png")
         self.logo = self.logo.resize((273, 267), Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(self.logo)
 

@@ -7,7 +7,7 @@ from PIL import Image
 
 class Training:
     def __init__(self) -> None:
-        self.image_dir = r'cafe_application\img\face'
+        self.image_dir = r'cafe_application\img\faces'
         self.training_dir = r'cafe_application\classifiers'
         self.model = cv2.face.LBPHFaceRecognizer_create()
         self.face_cascade = cv2.CascadeClassifier(r'cafe_application\src\detection\haarcascade_frontalface_default.xml')
@@ -16,8 +16,8 @@ class Training:
         image_path = os.path.join(self.image_dir, customerID)
         labels = []
         faceSamples = []
-        for i in range(30):
-            img_PIL = Image.open(f'{image_path}_{i}.jpg').convert('L')
+        for i in range(40):
+            img_PIL = Image.open(fr'{image_path}\{i:03}.jpg').convert('L')
             img_numpy = np.array(img_PIL, 'uint8')
 
             label = int(customerID[3:])

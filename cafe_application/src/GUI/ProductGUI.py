@@ -105,12 +105,11 @@ class ProductGUI(Frame):
     def selectImage(self):
         self.initial_dir = os.path.expanduser('cafe_application\\img')
         self.path = filedialog.askopenfilename(initialdir=self.initial_dir, filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.bmp")]).split("/")[-1]
-        self.chosenImg = "cafe_application\\img\\" + self.path
+        self.chosenImg = fr"cafe_application\img\{self.path}"
         self.imgProduct.destroy()
         self.img = ImageTk.PhotoImage(Image.open(self.chosenImg))
         self.imgProduct = Label(self.showImage, image=self.img, bg="#FFFFFF")
         self.imgProduct.pack()
-        self.chosenImg = "cafe_application\\\\img\\\\" + self.path
 
     def showDetailsProduct(self, event):
         for row in self.table.selection():

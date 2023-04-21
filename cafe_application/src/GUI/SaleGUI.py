@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from threading import Thread
 from tkinter import *
@@ -5,6 +6,7 @@ from tkinter import messagebox, ttk
 
 from BLL.BillBLL import BillBLL
 from BLL.BillDetailsBLL import BillDetailsBLL
+from BLL.CustomerBLL import CustomerBLL
 from BLL.ProductBLL import ProductBLL
 from BLL.StaffBLL import StaffBLL
 from detection.detection import Detection
@@ -97,6 +99,22 @@ class SaleGUI(Frame):
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].insert(0, self.billBLL.getAutoID())
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].configure(state='readonly')
                 self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+            elif self.columnNames[i] == "CUSTOMER_ID":
+                self.TextFieldsForm.append(Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30))
+                self.TextFieldsForm[len(self.TextFieldsForm)-1].grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+                self.TextFieldsForm[len(self.TextFieldsForm)-1].bind("<KeyRelease>", self.updateCustomerName)
+
+                self.row = self.row + 1
+                self.column = 0
+
+                self.nameLabel = Label(self.pnlBillConfiguration, text="NAME: ", fg="#000000", bg="#ffffff")
+                self.nameLabel.grid(row=self.row, column=self.column, padx=20, pady=10)
+
+                self.column = self.column + 1
+
+                self.customerName = Entry(self.pnlBillConfiguration, fg="#000000", bg="#ffffff", width=30, state="disabled")
+                self.customerName.grid(row=self.row, column=self.column, padx=20, pady=10, ipady=4)
+
             elif self.columnNames[i] == "STAFF_ID":
                 self.cbbStaffID = ttk.Combobox(self.pnlBillConfiguration, values=self.staffsID, width=27)
                 self.cbbStaffID.configure(state="readonly")
@@ -118,7 +136,7 @@ class SaleGUI(Frame):
             self.row = self.row + 1
             self.column = 0
 
-        self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=400, highlightthickness=0, borderwidth=0)
+        self.billDetails = Frame(self.panel2, bg="#FFFFFF", width=350, height=350, highlightthickness=0, borderwidth=0)
         self.billDetails.pack(padx=10, pady=10, fill=BOTH, expand=True)
         self.billDetails.pack_propagate(False)
 
@@ -200,20 +218,41 @@ class SaleGUI(Frame):
 
     def buy(self):
         dop = datetime.strptime(self.TextFieldsForm[2].get(), "%Y-%m-%d").date()
-        self.billBLL.addBill(Bill(self.TextFieldsForm[0].get(), self.TextFieldsForm[1].get(), self.cbbStaffID.get(), dop, float(0), False))
+        name = ''
+        if self.TextFieldsForm[1].get() == '':
+            name = 'CUS000'
+        else:
+            name = self.TextFieldsForm[1].get()
+        self.billBLL.addBill(Bill(self.TextFieldsForm[0].get(), name, self.cbbStaffID.get(), dop, float(0), False))
         for i in range(0, len(self.TextFieldsBillDetails)):
-            if i%2==0:
+            if i % 2 == 0:
                 product = self.productBLL.findProductsBy({"PRODUCT_ID": self.TextFieldsBillDetails[i].get()})[0]
             else:
                 self.billDetailsBLL.addBillDetails(BillDetails(self.TextFieldsForm[0].get(), product.getProductID(), int(self.TextFieldsBillDetails[i].get())))
         self.ref()
 
     def dec(self):
-        thread = Thread(target=self.detection.detect)
+        thread = Thread(target=self.detection.detect(self.customerName))
         thread.start()
 
     def on_wheelCanvas(self, event):
         self.canvas.yview_scroll(int(-1 * (event.delta/120)), "units")
+
+    def updateCustomerName(self, event):
+        text = event.widget.get()
+        if re.match(r'^CUS\d{3}$', text):
+            customers = CustomerBLL().findCustomersBy({"CUSTOMER_ID": text})
+            if len(customers) > 0:
+                self.customerName.configure(state='normal')
+                self.customerName.delete(0, END)
+                self.customerName.insert(END, customers[0].getName())
+                self.customerName.configure(state='disabled')
+        else:
+            self.customerName.configure(state='normal')
+            self.customerName.delete(0, END)
+            self.customerName.configure(state='disabled')
+
+
 
     def ref(self):
         self.TextFieldsForm[0].configure(state="normal")
