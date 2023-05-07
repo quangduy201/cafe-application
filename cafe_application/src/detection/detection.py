@@ -35,12 +35,11 @@ class Detection:
                 roi_gray = gray[y:y+h, x:x+w]
                 self.customerID = ''
                 minimum = 100
-                confidences = []
                 for model_id, model in self.models.items():
                     label, confidence = model.predict(roi_gray)
-                    confidences.append(confidence)
                     if confidence < 50 and confidence < minimum:
                         self.customerID = model_id
+                        minimum = confidence
 
                 if self.customerID != '':
                     self.customer = self.customerBLL.findCustomersBy({"CUSTOMER_ID": self.customerID})[0]

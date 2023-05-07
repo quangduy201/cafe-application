@@ -1,7 +1,9 @@
 # Cafe Application
+
 Cafe Management is a desktop Python application that helps manage a cafe.
 The app includes face recognition for customer authentication using OpenCV.
-It consists of three layers:<br>
+It consists of three layers:
+
 - Graphics User Interface (GUI): a presentation layer that uses Tkinter for the user interface.
 - Business Logic Layer (BLL): a business layer that handles the application logic.
 - Data Access Layer (DAL): a data access layer that connects to a MySQL database.
@@ -9,6 +11,7 @@ It consists of three layers:<br>
 ___
 
 ## Table of Contents
+
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -19,7 +22,9 @@ ___
 ___
 
 ## Features
+
 The Cafe Management application includes the following features:
+
 - Customer authentication using face recognition.
 - Manage items which a real cafe has (e.g. products, staffs, customers, ingredients...).
 - Create, manage and export bills (selling products) and receipt (importing ingredients) to Excel.
@@ -28,7 +33,9 @@ The Cafe Management application includes the following features:
 ___
 
 ## Installation
+
 To install the Cafe Management application, follow these steps:
+
 - Clone the repository to your local machine (VSCode is recommended).
 - Open a terminal at the project folder and type this: `python ./setup.py` to create a virtual environment (venv)
 - Activate the venv: `./venv/Scripts/activate`
@@ -40,6 +47,7 @@ To install the Cafe Management application, follow these steps:
 ___
 
 ## Usage
+
 - Log in with the default account: `username = 'admin'`, `password = 'admin'`
 - Use the GUI to manage items, bills, and receipts.
 - Click the "DETECTION" button to use face recognition for customer authentication.
@@ -47,6 +55,7 @@ ___
 ___
 
 ## Contributors
+
 The following contributors have contributed to the Cafe Management:
 
 | **ID**       | **Name**                                              |
@@ -58,11 +67,13 @@ The following contributors have contributed to the Cafe Management:
 ___
 
 ## External Dependencies
+
 Look up this file [`requirement.txt`](requirements.txt) to see the dependencies
 
 ___
 
 ## License
+
 This project is licensed under the [`MIT License`](https://opensource.org/licenses/MIT).
 See the [`LICENSE`](LICENSE) file for more information.
 

@@ -9,6 +9,5 @@ from GUI.LoginGUI import LoginGUI
 
 
 def main():
-    # LoginGUI()
-    HomeGUI(Account('AC000', 'admin', 'admin', 'DE00', 'ST00', False))
-
+    LoginGUI()
+    # HomeGUI(Account('AC000', 'admin', 'admin', 'DE00', 'ST00', False))

@@ -16,8 +16,8 @@ class Training:
         image_path = os.path.join(self.image_dir, customerID)
         labels = []
         faceSamples = []
-        for i in range(40):
-            img_PIL = Image.open(fr'{image_path}\{i:03}.jpg').convert('L')
+        for file in os.listdir(image_path):
+            img_PIL = Image.open(fr'{image_path}\{file}').convert('L')
             img_numpy = np.array(img_PIL, 'uint8')
 
             label = int(customerID[3:])
